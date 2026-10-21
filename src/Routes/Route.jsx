@@ -23,6 +23,7 @@ import TermsConditions from "../pages/About/LegalTerms";
 import RefundPolicy from "../pages/About/ReturnsPolicy";
 import ShippingPolicy from "../pages/About/DeliveryPolicy";
 import CategoriesSection from "../pages/Categories";
+import WholesaleB2B from "../pages/WholesaleB2B";
 
 export const Route = createBrowserRouter([
   {
@@ -131,6 +132,26 @@ export const Route = createBrowserRouter([
       {
         path: "/category",
         element: <CategoriesSection />,
+      },
+
+      {
+        path: "/wholesale",
+        element: <WholesaleB2B />,
+      },
+
+      {
+        path: "/b2b",
+        element: <WholesaleB2B />,
+      },
+
+      {
+        path: "/gym-supply",
+        element: <WholesaleB2B />,
+      },
+
+      {
+        path: "/b2b-wholesale",
+        element: <WholesaleB2B />,
       },
     ],
   },

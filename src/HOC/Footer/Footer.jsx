@@ -48,6 +48,7 @@ const QUICK_LINKS = [
     links: [
       "FAQs & Help",
       "Contact Us",
+      "B2B Wholesale & Gym Supply",
       "My Account",
       "Delivery Policies",
       "Returns Policy",
@@ -148,8 +149,18 @@ export default function Footer() {
                 {col.links.map((label) => (
                   <li key={label}>
                     <button
-                      onClick={() => navigate("/gomzi-supplement")}
-                      className="text-left text-sm leading-5 text-text-light transition-colors hover:text-primary"
+                      onClick={() => {
+                        if (label === "B2B Wholesale & Gym Supply") navigate("/wholesale");
+                        else if (label === "Contact Us") navigate("/contact-us");
+                        else if (label === "FAQs & Help") navigate("/faq");
+                        else if (label === "About Us") navigate("/about");
+                        else if (label === "Privacy Policy") navigate("/privacy-policy");
+                        else if (label === "Terms & Conditions") navigate("/terms-and-conditions");
+                        else if (label === "Returns Policy") navigate("/refund-policy");
+                        else if (label === "Delivery Policies") navigate("/shipping-policy");
+                        else navigate("/gomzi-supplement");
+                      }}
+                      className="text-left text-sm leading-5 text-text-light transition-colors hover:text-primary cursor-pointer"
                     >
                       {label}
                     </button>

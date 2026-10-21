@@ -24,19 +24,19 @@ export default function CategoryRangeCard({
   onClick,
   className = "",
 }) {
-  const shell =
-    "group flex h-full w-[280px] shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-white text-left transition-colors hover:border-primary";
+  const shell = `group flex h-full ${
+    className.includes("w-") ? "" : "w-full"
+  } flex-col overflow-hidden rounded-xl sm:rounded-2xl border border-border bg-white text-left transition-all duration-300 hover:border-primary hover:shadow-md`;
 
   const body = (
     <>
-      {/* Image — category assets are portrait packshots, so they are shown
-          whole on a light plate rather than cropped. */}
-      <div className="relative flex h-[220px] w-full shrink-0 items-center justify-center bg-bg-light p-4">
+      {/* Image plate — responsive height with smooth multiply blend */}
+      <div className="relative flex h-[145px] xs:h-[165px] sm:h-[200px] md:h-[220px] w-full shrink-0 items-center justify-center bg-bg-light p-2.5 sm:p-4">
         <img
           src={image || "/images/product-placeholder.webp"}
           alt={title}
           loading="lazy"
-          className="max-h-full max-w-full object-contain"
+          className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
           style={{ mixBlendMode: "multiply" }}
           onError={(e) => {
             e.currentTarget.onerror = null;
@@ -44,37 +44,39 @@ export default function CategoryRangeCard({
           }}
         />
         {badge && (
-          <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-text shadow-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+          <span className="absolute left-2 top-2 sm:left-3 sm:top-3 inline-flex items-center gap-1 sm:gap-1.5 rounded-full bg-white/95 backdrop-blur-xs px-2 py-0.5 sm:px-3 sm:py-1.5 text-[9px] sm:text-[11px] font-bold uppercase tracking-wide text-text shadow-xs border border-border/40">
+            <span className="h-1 sm:h-1.5 w-1 sm:w-1.5 rounded-full bg-primary" />
             {badge}
           </span>
         )}
       </div>
 
       {/* Body */}
-      <div className="flex flex-1 flex-col p-4">
-        {/* Title + count: fixed 2-line block so every card lines up */}
-        <div className="flex min-h-[56px] items-baseline justify-between gap-2">
-          <h3 className="line-clamp-2 min-w-0 text-lg font-semibold leading-snug text-text group-hover:text-primary transition-colors">
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
+        {/* Title + count: flexible stack on mobile, horizontal on tablet/desktop */}
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-0.5 sm:gap-2 min-h-[38px] sm:min-h-[56px]">
+          <h3 className="line-clamp-2 min-w-0 text-xs sm:text-base md:text-lg font-bold leading-tight sm:leading-snug text-text group-hover:text-primary transition-colors">
             {title}
           </h3>
           {count > 0 && (
-            <span className="shrink-0 text-sm font-medium text-text-light">
+            <span className="shrink-0 text-[10px] sm:text-xs md:text-sm font-medium text-text-light">
               {count} {count === 1 ? "Product" : "Products"}
             </span>
           )}
         </div>
 
-        <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-text-light">
-          {subtitle}
-        </p>
+        {subtitle && (
+          <p className="mt-1 line-clamp-2 text-[11px] sm:text-xs md:text-sm leading-relaxed text-text-light font-normal">
+            {subtitle}
+          </p>
+        )}
 
         {/* CTA pinned to the bottom of every card */}
-        <div className="mt-auto pt-4">
-          <div className="divider mb-4" />
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-            Explore Range
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+        <div className="mt-auto pt-2.5 sm:pt-4">
+          <div className="divider mb-2.5 sm:mb-4" />
+          <span className="inline-flex items-center justify-between sm:justify-start w-full gap-1.5 sm:gap-2 text-[11px] sm:text-xs md:text-sm font-semibold text-primary">
+            <span>Explore Range</span>
+            <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-200 group-hover:translate-x-1" />
           </span>
         </div>
       </div>

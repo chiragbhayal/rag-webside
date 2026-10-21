@@ -192,6 +192,7 @@ export default function SeasonFavoritesSection() {
           {enriched.map((cat) => (
             <div key={cat.id} className="mx-2 flex items-stretch">
               <CategoryRangeCard
+                className="w-[260px] sm:w-[280px] shrink-0"
                 title={cat.title}
                 subtitle={cat.subtitle}
                 image={cat.image}

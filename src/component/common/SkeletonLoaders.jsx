@@ -214,25 +214,25 @@ export const BrandShowcaseSkeleton = ({ count = 2 }) => (
  * Category listing grid skeleton
  */
 export const CategoryGridSkeleton = ({ count = 8 }) => (
-  <div className="grid grid-cols-2 items-stretch gap-4 sm:grid-cols-3 lg:grid-cols-4">
+  <div className="grid grid-cols-2 items-stretch gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
     {[...Array(count)].map((_, i) => (
       <div
         key={i}
-        className="flex h-full w-[280px] shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-white"
+        className="flex h-full w-full flex-col overflow-hidden rounded-xl sm:rounded-2xl border border-border bg-white"
       >
-        <div className="flex h-[220px] w-full shrink-0 items-center justify-center bg-bg-light p-4">
-          <div className="h-full w-full rounded skeleton-shimmer" />
+        <div className="flex h-[145px] xs:h-[165px] sm:h-[200px] md:h-[220px] w-full shrink-0 items-center justify-center bg-bg-light p-2.5 sm:p-4">
+          <div className="h-full w-full rounded-lg skeleton-shimmer" />
         </div>
-        <div className="flex flex-1 flex-col p-4">
-          <div className="mb-2 flex min-h-[56px] items-start justify-between gap-2">
-            <div className="h-5 w-28 rounded skeleton-shimmer" />
-            <div className="h-4 w-16 shrink-0 rounded skeleton-shimmer" />
+        <div className="flex flex-1 flex-col p-3 sm:p-4">
+          <div className="mb-2 flex min-h-[38px] sm:min-h-[56px] flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-2">
+            <div className="h-4 sm:h-5 w-24 sm:w-28 rounded skeleton-shimmer" />
+            <div className="h-3 sm:h-4 w-12 sm:w-16 shrink-0 rounded skeleton-shimmer" />
           </div>
-          <div className="mb-1 h-4 w-full rounded skeleton-shimmer" />
-          <div className="h-4 w-4/5 rounded skeleton-shimmer" />
-          <div className="mt-auto pt-4">
-            <div className="divider mb-4" />
-            <div className="h-4 w-28 rounded skeleton-shimmer" />
+          <div className="mb-1 h-3 sm:h-4 w-full rounded skeleton-shimmer" />
+          <div className="h-3 sm:h-4 w-4/5 rounded skeleton-shimmer" />
+          <div className="mt-auto pt-2.5 sm:pt-4">
+            <div className="divider mb-2.5 sm:mb-4" />
+            <div className="h-3.5 sm:h-4 w-24 sm:w-28 rounded skeleton-shimmer" />
           </div>
         </div>
       </div>
