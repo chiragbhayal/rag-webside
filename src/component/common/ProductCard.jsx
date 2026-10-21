@@ -1,157 +1,261 @@
-// ─────────────────────────────────────────────
-//  Reusable ProductCard Component
-//  Usage: import ProductCard from "@/components/ProductCard";
-// ─────────────────────────────────────────────
-import { Link, useNavigate } from "react-router-dom";
-import { getProductImageUrl } from "../../utils/productAdapter";
+import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { ShoppingCart, Heart, ShieldCheck, Gift } from "lucide-react";
+import {
+  getProductImageUrl,
+  getFallbackProductImage,
+} from "../../utils/productAdapter";
 import { addProductToCart } from "../../services/cartStorage.service";
+import { successToast } from "../../utils/toast";
+import useAuth from "../../hooks/useAuth";
 
-// Star Rating Component
-function StarRating({ stars, total = 5 }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {[...Array(total)].map((_, i) => (
-        <svg
-          key={i}
-          className={`w-3.5 h-3.5 ${
-            i < stars ? "text-[#f59e0b]" : "text-gray-200"
-          } fill-current`}
-          viewBox="0 0 20 20"
-        >
-          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-        </svg>
-      ))}
-    </div>
-  );
-}
-
-export default function ProductCard({ product, onAddToCart }) {
+/**
+ * HealthKart-identical Product Card.
+ *
+ * Layout:
+ * - Top Row: Optional Badge (e.g. Trending Now, Trustified) + Wishlist Heart
+ * - Centered Product Image
+ * - Rating Pill (brand primary with star) + Indian Vegetarian indicator
+ * - 2-line clamped bold product title
+ * - Current Price (bold) + Strikethrough MRP
+ * - Premium Member box (★ ₹... for Premium Member)
+ * - Stacked CTA Buttons:
+ *     1. Add to Cart (White, Navy Primary border, Navy Primary text)
+ *     2. Buy Now (Solid Navy Primary, White text, directs to /checkouts)
+ */
+export default function ProductCard({
+  product,
+  onAddToCart,
+  onBadgeClick,
+  badge: badgeProp,
+  badgeTone,
+  className = "",
+}) {
   const navigate = useNavigate();
-  const productIdentifier = product?.slug || product?._id || product?.id;
-  const productUrl = productIdentifier
-    ? `/product/${productIdentifier}`
-    : `/gomzi-supplement`;
+  const location = useLocation();
+  const { isAuthenticated } = useAuth();
+  const [liked, setLiked] = useState(false);
+  const [added, setAdded] = useState(false);
+  const [busy, setBusy] = useState(false);
 
-  const displayPrice = Number(
-    product?.sellingPrice || product?.discountPrice || product?.price || 999
-  );
-  const originalPrice = Number(
-    product?.price && product.price > displayPrice
-      ? product.price
-      : product?.originalPrice || Math.round(displayPrice * 1.3)
-  );
+  if (!product) return null;
 
-  const discountPct =
-    originalPrice > displayPrice
-      ? Math.round(((originalPrice - displayPrice) / originalPrice) * 100)
-      : 0;
+  const id = product.id || product._id;
+  const slug = product.slug || id;
+  const url = slug ? `/product/${slug}` : "/gomzi-supplement";
 
-  const imageUrl = getProductImageUrl(product);
+  const price = Number(product.price ?? product.discountPrice) || 0;
+  const mrp =
+    Number(product.originalPrice) ||
+    (price > 0 ? Math.round(price * 1.35) : 0);
+
+  const premiumPrice =
+    Number(product.premiumPrice) ||
+    (price > 0 ? Math.round(price * 0.97) : 0);
+
+  const rawRating = Number(product.rating?.average ?? product.rating);
+  const rating =
+    !isNaN(rawRating) && rawRating > 0 ? rawRating.toFixed(1) : "4.5";
+
+  const badge =
+    badgeProp ||
+    product.badge ||
+    product.tag ||
+    (product.isTrending ? "Trending Now" : null);
+
+  const handleCardClick = () => {
+    navigate(url);
+  };
+
+  const toggleWishlist = (e) => {
+    e.stopPropagation();
+    const next = !liked;
+    setLiked(next);
+    if (next) {
+      successToast("Added to wishlist!");
+    }
+  };
+
+  const handleAddToCart = async (e) => {
+    e.stopPropagation();
+    setBusy(true);
+    try {
+      if (onAddToCart) {
+        await onAddToCart(product);
+      } else {
+        await addProductToCart(product);
+        successToast(`${product.name} added to cart`);
+      }
+      setAdded(true);
+      setTimeout(() => setAdded(false), 2000);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleBuyNow = async (e) => {
+    e.stopPropagation();
+    setBusy(true);
+    try {
+      if (onAddToCart) {
+        await onAddToCart(product);
+      } else {
+        await addProductToCart(product);
+      }
+
+      // Buy Now opens the product's own page. If the visitor is not signed in
+      // yet, send them through login first and land back on that page.
+      if (isAuthenticated) {
+        navigate(url);
+      } else {
+        navigate(
+          `/login?redirect=${encodeURIComponent(url)}&from=${encodeURIComponent(
+            location.pathname + location.search
+          )}`
+        );
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
 
   return (
-    <div className="group relative bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-[#ebdcd7]/90 hover:border-amber-400/40 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(92,49,36,0.12)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col font-modelica">
-      {/* Subtle moving card sheen sweep on hover */}
-      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-[#5C3124]/[0.035] to-transparent pointer-events-none z-20" />
-
-      {/* ── Image Container ── */}
-      <div
-        className="relative bg-gradient-to-b from-[#faf8f6] to-white overflow-hidden cursor-pointer"
-        onClick={() => navigate(productUrl)}
-      >
-        {discountPct > 0 && (
-          <div className="absolute top-2.5 left-2.5 z-10 bg-gradient-to-r from-[#5C3124] to-[#7d4332] text-white text-[10.5px] font-bold px-2 py-0.5 rounded-lg shadow-xs tracking-tight">
-            {discountPct}% OFF
+    <article
+      onClick={handleCardClick}
+      className={`group relative flex h-full cursor-pointer flex-col justify-between rounded-2xl border border-border bg-white p-3.5 transition-all duration-300 hover:border-primary hover:shadow-md ${className}`}
+    >
+      <div>
+        {/* Top Header: Badge + Wishlist */}
+        <div className="flex h-6 items-center justify-between">
+          <div>
+            {badgeTone === "success" ? (
+              <span className="inline-flex items-center gap-1 rounded-sm bg-success px-2 py-0.5 text-[11px] font-bold text-white">
+                <Gift className="h-3 w-3" />
+                {badge}
+              </span>
+            ) : badge === "Trending Now" ? (
+              <span className="inline-block rounded-sm bg-primary-light px-2 py-0.5 text-[11px] font-bold tracking-tight text-primary">
+                Trending Now
+              </span>
+            ) : badge === "Trustified" ? (
+              <span className="inline-flex items-center gap-1 rounded-sm border border-success/25 bg-success-light px-1.5 py-0.5 text-[10px] font-bold text-success">
+                <ShieldCheck className="h-3 w-3 text-success" />
+                Trustified
+              </span>
+            ) : badge ? (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onBadgeClick?.();
+                }}
+                title={onBadgeClick ? "Click to copy coupon code" : undefined}
+                className={`inline-block rounded-sm border border-primary-border bg-primary-light px-2 py-0.5 text-[10px] font-bold text-primary ${
+                  onBadgeClick ? "cursor-pointer hover:border-primary" : ""
+                }`}
+              >
+                {badge}
+              </button>
+            ) : (
+              <div className="h-4" />
+            )}
           </div>
-        )}
 
-        <img
-          src={imageUrl}
-          alt={product?.name || "Product"}
-          className="w-full h-52 sm:h-56 md:h-60 lg:h-56 xl:h-64 object-contain p-3 group-hover:scale-[1.04] transition-transform duration-300"
-          onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "/images/product-placeholder.webp";
-          }}
-        />
+          <button
+            type="button"
+            onClick={toggleWishlist}
+            aria-label={liked ? "Remove from wishlist" : "Add to wishlist"}
+            className="flex h-7 w-7 items-center justify-center rounded-full text-text-muted transition-colors hover:text-red-500 cursor-pointer"
+          >
+            <Heart
+              className={`h-4 w-4 transition-transform ${
+                liked ? "fill-red-500 text-red-500 scale-110" : "text-text-muted"
+              }`}
+              strokeWidth={1.8}
+            />
+          </button>
+        </div>
+
+        {/* Product Image */}
+        <div className="mx-auto my-2 flex h-36 sm:h-44 w-full items-center justify-center p-2 bg-white">
+          <img
+            src={getProductImageUrl(product)}
+            alt={product.name}
+            loading="lazy"
+            className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = getFallbackProductImage(product);
+            }}
+          />
+        </div>
+
+        {/* Rating + Veg Symbol */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 rounded-sm bg-primary px-1.5 py-0.5 text-[11px] font-bold text-white shadow-2xs">
+            <span>{rating}</span>
+            <span className="text-[10px]">★</span>
+          </div>
+
+          {/* Indian Vegetarian Symbol */}
+          <div
+            className="flex h-3.5 w-3.5 items-center justify-center rounded-sm border border-success p-0.5"
+            title="100% Vegetarian"
+          >
+            <div className="h-1.5 w-1.5 rounded-full bg-success" />
+          </div>
+        </div>
+
+        {/* Product Title */}
+        <h3 className="mt-2 line-clamp-2 min-h-[36px] sm:min-h-[40px] text-xs sm:text-[13px] font-bold leading-snug text-text transition-colors group-hover:text-primary">
+          {product.name}
+        </h3>
+
+        {/* Pricing Row */}
+        <div className="mt-1.5 flex items-baseline gap-1.5">
+          <span className="text-base sm:text-lg font-semibold text-text">
+            ₹{price.toLocaleString("en-IN")}
+          </span>
+          {mrp > price && (
+            <span className="text-xs sm:text-sm font-normal text-text-muted line-through">
+              ₹{mrp.toLocaleString("en-IN")}
+            </span>
+          )}
+        </div>
+
+        {/* Premium Member Price */}
+        <div className="mt-2.5 flex items-center gap-1.5 rounded-md bg-primary-light/70 border border-primary-border/70 px-2.5 py-1.5 text-[11px] font-medium text-text">
+          <span className="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-primary bg-white text-[9px] font-black text-primary shadow-2xs">
+            ★
+          </span>
+          <span className="truncate">
+            <span className="font-bold text-primary">₹{premiumPrice.toLocaleString("en-IN")}</span>{" "}
+            <span className="text-text-secondary font-normal">for Premium Member</span>
+          </span>
+        </div>
       </div>
 
-      {/* ── Card Content ── */}
-      <div className="p-4 flex flex-col gap-1.5 flex-1">
-        {/* Category */}
-        {product?.categories?.[0] && (
-          <p className="text-[11px] uppercase tracking-wider text-[#77777e] font-semibold">
-            {product.categories[0]}
-          </p>
-        )}
-
-        {/* Product Name */}
-        <Link to={productUrl}>
-          <h3 className="text-sm sm:text-base font-bold text-[#1c1c28] group-hover:text-[#5C3124] transition-colors leading-snug line-clamp-2 min-h-[42px]">
-            {product.name}
-          </h3>
-        </Link>
-
-        {/* Stars + Reviews */}
-        <div className="flex items-center gap-1.5">
-          <StarRating stars={product?.rating?.average || 5} />
-          <span className="text-xs text-[#77777e]">
-            ({product?.rating?.totalReviews || 0})
-          </span>
-        </div>
-
-        {/* Price */}
-        <div className="flex items-baseline gap-2 mt-1">
-          <span className="text-lg sm:text-xl font-black text-[#1c1c28]">
-            ₹{displayPrice.toLocaleString("en-IN")}
-          </span>
-          {discountPct > 0 && (
-            <span className="text-xs sm:text-sm text-gray-400 line-through">
-              ₹{originalPrice.toLocaleString("en-IN")}
-            </span>
-          )}
-          {discountPct > 0 && (
-            <span className="text-xs font-bold text-[#5C3124]">
-              Save {discountPct}%
-            </span>
-          )}
-        </div>
-
-        <div className="flex-1" />
-
-        {/* Add to Cart Button */}
+      {/* Stacked CTA Buttons */}
+      <div className="mt-3 flex flex-col gap-2">
         <button
           type="button"
-          className="mt-3 w-full bg-transparent border-none p-0 cursor-pointer"
-          onClick={async (e) => {
-            e.stopPropagation();
-            if (onAddToCart) {
-              await onAddToCart(product);
-            } else {
-              await addProductToCart(product);
-            }
-          }}
+          onClick={handleAddToCart}
+          disabled={busy}
+          className="flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-primary bg-white py-2 text-xs sm:text-sm font-bold text-primary transition-colors hover:bg-primary-light active:scale-[0.99] disabled:opacity-60"
         >
-          <span className="group/btn relative overflow-hidden w-full py-2.5 text-white bg-gradient-to-r from-[#5C3124] via-[#6d3a2b] to-[#48261c] hover:from-[#48261c] hover:to-[#381c14] border border-amber-400/30 font-bold text-sm rounded-xl transition-all duration-300 hover:-translate-y-0.5 tracking-wide text-center flex items-center justify-center gap-2 shadow-md shadow-[#5C3124]/20 hover:shadow-lg hover:shadow-[#5C3124]/35 active:scale-[0.98]">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-amber-200 transition-transform duration-300 group-hover/btn:scale-110"
-            >
-              <circle cx="8" cy="21" r="1" />
-              <circle cx="19" cy="21" r="1" />
-              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-            </svg>
-            <span>Add to Cart</span>
-            <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-          </span>
+          <ShoppingCart className="h-4 w-4 text-primary" />
+          <span>{added ? "Added!" : busy ? "Adding..." : "Add to Cart"}</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleBuyNow}
+          disabled={busy}
+          className="w-full cursor-pointer rounded-lg bg-primary py-2 text-center text-xs sm:text-sm font-bold text-white shadow-2xs transition-colors hover:bg-primary-hover active:scale-[0.99] disabled:opacity-60"
+        >
+          Buy Now
         </button>
       </div>
-    </div>
+    </article>
   );
 }

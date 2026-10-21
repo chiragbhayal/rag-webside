@@ -1,62 +1,59 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 
-import BlackFeatureBar from "../common/Black-Feature-Bar";
-import { Download, ShoppingCart, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { getHeroBannerApi } from "../../api/banner.api";
-import { HeroSkeleton } from "../common/SkeletonLoaders";
+import CarouselControls from "../common/CarouselControls";
 
-// Dummy fallback banner data (commented out as requested - do not remove)
-/*
-const DEFAULT_BANNER = {
-  desktop_image: "/images/banner-(gls)-web-view.webp",
-  mobile_image: "/images/banner-(gls)-mobile-view.webp",
-  alt_text: "Science-backed sports nutrition products by Gomzi Supplement.",
+const FALLBACK_BANNER = {
+  _id: "gomzi-hero-banner",
+  desktop_image: "/images/banners/current-hero-banner.jpg",
+  alt_text: "Science-Backed Nutrition For Everyday Performance - Gomzi Nutrition",
   shop_link: "/gomzi-supplement",
-  brochure_url: "/pdf/gomzi-brochure.pdf",
-};
-*/
-
-const resolveImageUrl = (img) => {
-  if (!img) return "";
-  if (img.startsWith("http://") || img.startsWith("https://") || img.startsWith("/")) {
-    return img;
-  }
-  return `https://files.fggroup.in/${img}`;
 };
 
-export default function HeroSectionWithIcons() {
+/**
+ * Hero banner carousel.
+ * Full-bleed imagery, minimal chrome, quiet pagination.
+ */
+export default function HeroSection() {
   const navigate = useNavigate();
-  // Dummy banner removed, initialized with empty array for 100% dynamic API banners
-  // const [banners, setBanners] = useState([DEFAULT_BANNER]);
-  const [banners, setBanners] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [banners, setBanners] = useState([FALLBACK_BANNER]);
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
 
   useEffect(() => {
     let isMounted = true;
+
     const fetchHeroBanners = async () => {
       try {
         const res = await getHeroBannerApi();
-        if (isMounted && res.data?.data) {
-          const data = res.data.data;
-          if (Array.isArray(data.banners) && data.banners.length > 0) {
-            setBanners(data.banners);
-          } else if (data.desktop_image) {
-            setBanners([data]);
-          }
+        if (!isMounted || !res.data?.data) return;
+
+        const raw = res.data.data;
+        let list = [];
+
+        if (Array.isArray(raw.banners) && raw.banners.length > 0) {
+          list = raw.banners;
+        } else if (Array.isArray(raw) && raw.length > 0) {
+          list = raw;
+        } else if (raw.desktop_image || raw.mobile_image) {
+          list = [raw];
         }
-      } catch (err) {
-        // console.warn("Using default hero banner fallback:", err.message);
-        console.warn("Hero banner API failed to load:", err.message);
-      } finally {
-        if (isMounted) setLoading(false);
+
+        if (list.length > 0) {
+          setBanners(
+            list.map((b) => ({
+              ...b,
+              desktop_image:
+                b.desktop_image || b.mobile_image || FALLBACK_BANNER.desktop_image,
+            }))
+          );
+        }
+      } catch {
+        // keep the fallback banner
       }
     };
 
@@ -66,351 +63,100 @@ export default function HeroSectionWithIcons() {
     };
   }, []);
 
-  // const currentBanner = banners[activeIndex] || banners[0] || DEFAULT_BANNER;
-  const currentBanner = banners[activeIndex] || banners[0] || null;
+  const resolveImageUrl = (img) => {
+    if (!img) return FALLBACK_BANNER.desktop_image;
+    if (img.startsWith("http://") || img.startsWith("https://") || img.startsWith("/")) {
+      return img;
+    }
+    return `https://files.fggroup.in/${img}`;
+  };
 
-  const handleShopNow = () => {
-    const link = (currentBanner?.shop_link || "/gomzi-supplement").trim();
+  const handleSlideNavigation = (link) => {
+    if (!link) {
+      navigate("/gomzi-supplement");
+      return;
+    }
     if (link.startsWith("http://") || link.startsWith("https://")) {
       window.open(link, "_blank", "noopener,noreferrer");
-    } else if (link.startsWith("www.")) {
-      window.open(`https://${link}`, "_blank", "noopener,noreferrer");
     } else {
       navigate(link.startsWith("/") ? link : `/${link}`);
     }
   };
 
-  const handleDownload = () => {
-    const brochure = resolveImageUrl(currentBanner?.brochure_url || "/pdf/gomzi-brochure.pdf");
-    const link = document.createElement("a");
-    link.href = brochure;
-    link.download = "Gomzi-Brochure.pdf";
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  if (loading && banners.length === 0) {
-    return (
-      <section className="relative w-full overflow-hidden select-none">
-        <HeroSkeleton />
-        <BlackFeatureBar />
-      </section>
-    );
-  }
-
   return (
-    <section className="group relative w-full overflow-hidden select-none">
-      <div className="relative w-full">
-        {/* ================= Swiper Banner Slider ================= */}
-        {banners.length > 0 ? (
-          <Swiper
-            key={`hero-swiper-${banners.length}`}
-            modules={[Autoplay, Pagination, Navigation]}
-            speed={800}
-            grabCursor={banners.length > 1}
-            loop={banners.length > 1}
-            autoplay={
-              banners.length > 1
-                ? {
-                    delay: 4500,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                  }
-                : false
-            }
-            pagination={
-              banners.length > 1
-                ? {
-                    clickable: true,
-                  }
-                : false
-            }
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
-            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-            className="hero-swiper w-full relative z-10"
-          >
-            {banners.map((slide, index) => (
-              <SwiperSlide key={slide._id || index} className="w-full">
-                <picture className="block w-full">
-                  <source
-                    srcSet={resolveImageUrl(slide.mobile_image || slide.desktop_image)}
-                    media="(max-width: 1023px)"
-                  />
+    <section className="relative w-full bg-bg-light">
+      <div className="relative w-full overflow-hidden">
+        <Swiper
+          modules={[Autoplay]}
+          speed={600}
+          grabCursor={banners.length > 1}
+          loop={banners.length > 1}
+          autoplay={
+            banners.length > 1
+              ? { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }
+              : false
+          }
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+          pagination={{ clickable: true }}
+          className="w-full"
+        >
+          {banners.map((slide, index) => (
+            <SwiperSlide key={slide._id || slide.id || index}>
+              <div
+                onClick={() => handleSlideNavigation(slide.shop_link || slide.shopLink)}
+                className="w-full cursor-pointer bg-bg-page"
+              >
+                <img
+                  src={resolveImageUrl(slide.desktop_image)}
+                  alt={slide.alt_text || slide.title || "Gomzi Nutrition"}
+                  fetchPriority={index === 0 ? "high" : "low"}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  className="block h-auto w-full select-none"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = FALLBACK_BANNER.desktop_image;
+                  }}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-                  <source
-                    srcSet={resolveImageUrl(slide.desktop_image)}
-                    media="(min-width: 1024px)"
-                  />
-
-                  <img
-                    src={resolveImageUrl(slide.desktop_image)}
-                    alt={slide.alt_text || "Science-backed sports nutrition products by Gomzi Supplement."}
-                    fetchPriority={index === 0 ? "high" : "low"}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    className="
-                      block
-                      w-full
-                      h-auto
-                      object-cover
-                      select-none
-                    "
-                  />
-                </picture>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : (
-          <div className="w-full aspect-[16/7] md:aspect-[21/9] lg:aspect-[2.6/1] bg-gradient-to-r from-[#24140e] via-[#331c14] to-[#1c100c]" />
-        )}
-
-        {/* ================= Minimal Navigation Chevron Arrows ================= */}
         {banners.length > 1 && (
           <>
-            <button
-              onClick={() => swiperRef.current?.slidePrev()}
-              type="button"
-              className="
-                hidden md:flex
-                absolute z-30
-                left-3 sm:left-4
-                top-1/2 -translate-y-1/2
-                w-10 h-10 sm:w-11 sm:h-11
-                rounded-full
-                bg-black/35 hover:bg-[#5C3124]
-                text-white
-                backdrop-blur-md
-                border border-white/20
-                items-center justify-center
-                shadow-lg
-                transition-all duration-300
-                opacity-0 group-hover:opacity-90 hover:!opacity-100
-                hover:scale-105 active:scale-95
-                cursor-pointer
-              "
-              aria-label="Previous Hero Slide"
-            >
-              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-            </button>
+            <CarouselControls
+              variant="overlay"
+              showNext={false}
+              onPrev={() => swiperRef.current?.slidePrev()}
+              className="absolute left-4 top-1/2 z-20 hidden -translate-y-1/2 sm:flex"
+            />
+            <CarouselControls
+              variant="overlay"
+              showPrev={false}
+              onNext={() => swiperRef.current?.slideNext()}
+              className="absolute right-4 top-1/2 z-20 hidden -translate-y-1/2 sm:flex"
+            />
 
-            <button
-              onClick={() => swiperRef.current?.slideNext()}
-              type="button"
-              className="
-                hidden md:flex
-                absolute z-30
-                right-3 sm:right-4
-                top-1/2 -translate-y-1/2
-                w-10 h-10 sm:w-11 sm:h-11
-                rounded-full
-                bg-black/35 hover:bg-[#5C3124]
-                text-white
-                backdrop-blur-md
-                border border-white/20
-                items-center justify-center
-                shadow-lg
-                transition-all duration-300
-                opacity-0 group-hover:opacity-90 hover:!opacity-100
-                hover:scale-105 active:scale-95
-                cursor-pointer
-              "
-              aria-label="Next Hero Slide"
-            >
-              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-            </button>
+            <div className="absolute bottom-4 left-1/2 z-20 -translate-x-1/2">
+              <div className="flex items-center gap-2 rounded-full bg-black/40 px-3 py-2 backdrop-blur-sm">
+                {banners.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => swiperRef.current?.slideToLoop(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className={`h-1.5 rounded-full border-none p-0 transition-all duration-300 ${
+                      activeIndex === i ? "w-4 bg-primary" : "w-1.5 bg-[#dbdee9]"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </>
         )}
-
-        {/* ================= DESKTOP STATIC OVERLAY (>= 1024px) ================= */}
-        <div
-          className="
-            hidden lg:flex
-            absolute z-20
-            left-[2.8%] xl:left-[3.2%] 2xl:left-[3.8%]
-            top-[10%] xl:top-[12%] 2xl:top-[14%]
-            max-w-[55%] xl:max-w-[50%]
-            flex-col items-start
-            select-none
-            pointer-events-none
-          "
-        >
-          {/* Static 3-Line Luxury Brand Heading */}
-          <h1 className="flex flex-col font-black tracking-[-0.035em] uppercase leading-[0.92] text-left">
-            <span className="text-[#964816] text-3xl lg:text-4xl xl:text-[54px] 2xl:text-[66px] drop-shadow-sm font-black">
-              SCIENCE-BACKED
-            </span>
-            <span className="text-[#23150E] text-3xl lg:text-4xl xl:text-[54px] 2xl:text-[66px] drop-shadow-sm font-black mt-1 xl:mt-1.5">
-              NUTRITION FOR EVERYDAY
-            </span>
-            <span className="text-[#23150E] text-3xl lg:text-4xl xl:text-[54px] 2xl:text-[66px] drop-shadow-sm font-black mt-1 xl:mt-1.5">
-              PERFORMANCE
-            </span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="font-bold text-[#5A2F20] text-sm lg:text-base xl:text-lg 2xl:text-xl tracking-tight mt-2.5 xl:mt-3.5 text-left">
-            Premium Protein | Wellness | No Amino Spiking 100%
-          </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-row items-center gap-3.5 xl:gap-5 mt-4 xl:mt-6 pointer-events-auto">
-            {/* Shop Now Primary Button */}
-            <button
-              onClick={handleShopNow}
-              className="
-                group relative overflow-hidden
-                bg-gradient-to-r from-[#5C3124] via-[#6d3a2b] to-[#48261c]
-                hover:from-[#48261c] hover:to-[#381c14]
-                text-white
-                font-bold
-                rounded-xl
-                sm:rounded-2xl
-                shadow-lg shadow-[#5C3124]/35
-                hover:shadow-xl hover:shadow-[#5C3124]/50
-                border border-amber-400/30
-                transition-all duration-300
-                hover:-translate-y-0.5 active:scale-[0.98]
-                cursor-pointer
-                whitespace-nowrap
-                flex items-center justify-center
-                gap-2 sm:gap-2.5
-                text-sm sm:text-base xl:text-lg px-6 py-3 lg:px-7 lg:py-3.5
-              "
-            >
-              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:scale-110 text-amber-200" />
-              <span className="tracking-tight">Shop Now</span>
-              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 transition-transform duration-300 group-hover:translate-x-1" />
-
-              {/* Subtle ambient sheen */}
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-            </button>
-
-            {/* Download Brochure Secondary Frosted Button */}
-            <button
-              onClick={handleDownload}
-              className="
-                group relative overflow-hidden
-                bg-white/95 hover:bg-white
-                backdrop-blur-md
-                border-2 border-[#5C3124]/30 hover:border-[#5C3124]
-                text-[#3d1e15] hover:text-[#5C3124]
-                font-bold
-                rounded-xl
-                sm:rounded-2xl
-                shadow-md hover:shadow-xl hover:shadow-[#5C3124]/15
-                transition-all duration-300
-                hover:-translate-y-0.5 active:scale-[0.98]
-                cursor-pointer
-                whitespace-nowrap
-                flex items-center justify-center
-                gap-2 sm:gap-2.5
-                text-sm sm:text-base xl:text-lg px-6 py-3 lg:px-7 lg:py-3.5
-              "
-            >
-              <Download className="w-4 h-4 sm:w-5 sm:h-5 text-[#5C3124] transition-transform duration-300 group-hover:-translate-y-0.5" />
-              <span className="tracking-tight">Download Brochure</span>
-            </button>
-          </div>
-        </div>
-
-        {/* ================= MOBILE & TABLET STATIC OVERLAY (< 1024px) ================= */}
-        {/* Top: Headline, Subtitle, Badges */}
-        <div
-          className="
-            lg:hidden
-            absolute z-20
-            top-[3%] sm:top-[4%]
-            left-1/2 -translate-x-1/2
-            w-full px-3 sm:px-6
-            flex flex-col items-center text-center
-            select-none
-            pointer-events-none
-          "
-        >
-          <h1 className="flex flex-col font-black tracking-[-0.035em] uppercase leading-[0.94] text-center">
-            <span className="text-[#964816] text-xl sm:text-2xl md:text-3xl font-black">
-              SCIENCE-BACKED
-            </span>
-            <span className="text-[#23150E] text-xl sm:text-2xl md:text-3xl font-black mt-0.5">
-              NUTRITION FOR EVERYDAY
-            </span>
-            <span className="text-[#23150E] text-xl sm:text-2xl md:text-3xl font-black mt-0.5">
-              PERFORMANCE
-            </span>
-          </h1>
-
-          <p className="font-bold text-[#5A2F20] text-[10.5px] sm:text-xs md:text-sm tracking-tight mt-1 sm:mt-1.5">
-            Premium Protein | Wellness | No Amino Spiking 100%
-          </p>
-        </div>
-
-        {/* Bottom: Action Buttons */}
-        <div
-          className="
-            lg:hidden
-            absolute z-20
-            bottom-[3%] sm:bottom-[3.5%] md:bottom-[4%]
-            left-1/2 -translate-x-1/2
-            w-full px-3 sm:px-5
-            flex flex-row items-center justify-center gap-2 sm:gap-3
-          "
-        >
-          <button
-            onClick={handleShopNow}
-            className="
-              group relative overflow-hidden
-              bg-gradient-to-r from-[#5C3124] via-[#6d3a2b] to-[#48261c]
-              hover:from-[#48261c] hover:to-[#381c14]
-              text-white
-              font-bold
-              rounded-xl
-              shadow-lg shadow-[#5C3124]/35
-              border border-amber-400/30
-              transition-all duration-300
-              hover:-translate-y-0.5 active:scale-[0.98]
-              cursor-pointer
-              whitespace-nowrap
-              flex items-center justify-center
-              gap-2
-              text-xs sm:text-sm px-4 py-2.5 sm:px-5 sm:py-3
-            "
-          >
-            <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-amber-200" />
-            <span className="tracking-tight">Shop Now</span>
-            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300" />
-          </button>
-
-          <button
-            onClick={handleDownload}
-            className="
-              group relative overflow-hidden
-              bg-white/95 hover:bg-white
-              backdrop-blur-md
-              border-2 border-[#5C3124]/30 hover:border-[#5C3124]
-              text-[#3d1e15]
-              font-bold
-              rounded-xl
-              shadow-md hover:shadow-xl hover:shadow-[#5C3124]/15
-              transition-all duration-300
-              hover:-translate-y-0.5 active:scale-[0.98]
-              cursor-pointer
-              whitespace-nowrap
-              flex items-center justify-center
-              gap-2
-              text-xs sm:text-sm px-4 py-2.5 sm:px-5 sm:py-3
-            "
-          >
-            <Download className="w-4 h-4 sm:w-5 sm:h-5 text-[#5C3124]" />
-            <span className="tracking-tight">Download Brochure</span>
-          </button>
-        </div>
       </div>
-
-      <BlackFeatureBar />
     </section>
   );
 }
-

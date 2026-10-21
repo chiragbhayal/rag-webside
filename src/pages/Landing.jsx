@@ -1,69 +1,43 @@
 import React from "react";
-import SEO from "../component/SEO";
-import HeroSectionWithIcons from "../component/ui/HeroSection";
-import SeasonFavoritesSection from "../component/ui/SeasonFavoritesSection";
-import TrendingDealsSection from "../component/ui/TrendingDealsSection";
-import BestSellingSection from "../component/ui/BestSellingSection";
-import PromoBannerSlider from "../component/ui/PromoBannerSlider";
-import BrandCompanyShowcaseSection from "../component/ui/BrandCompanyShowcaseSection";
-import NutritionPromoBannerSlider from "../component/ui/NutritionPromoBannerSlider";
-import BankOffersBannerSlider from "../component/ui/BankOffersBannerSlider";
-import TransparencySection from "../component/ui/transparency";
-import TrustAndGoalSection from "../component/ui/TrustAndGoalSection";
-import CustomerReviewsHome from "../component/ui/CustomerReviewsHome";
-import AthleteCircleSection from "../component/ui/AthleteCircleSection";
-import TrustExpertsSection from "../component/ui/TrustExpertsSection";
-import FAQSection from "../component/ui/FAQItem";
 
+import SEO from "../component/SEO";
+import HeroSection from "../component/ui/HeroSection";
+import SeasonFavoritesSection from "../component/ui/SeasonFavoritesSection";
+import TopProductsSection from "../component/ui/TopProductsSection";
+import NutritionPromoBannerSlider from "../component/ui/NutritionPromoBannerSlider";
+import TopProteinPicksSection from "../component/ui/TopProteinPicksSection";
+import PromoBannerCarousel from "../component/ui/PromoBannerCarousel";
+import DailyWellnessSection from "../component/ui/DailyWellnessSection";
+import AdsBannerSection from "../component/ui/AdsBannerSection";
+import FitFoodRangeSection from "../component/ui/FitFoodRangeSection";
+import PreIntraWorkoutSection from "../component/ui/PreIntraWorkoutSection";
+import BrandRangeSection from "../component/ui/BrandRangeSection";
+import BlackFeatureBar from "../component/common/Black-Feature-Bar";
+
+/**
+ * Home page — HealthKart layout order:
+ *   hero -> category marquee -> offer banners -> top products
+ *   -> flagship banner -> top protein picks -> daily wellness
+ *   -> fit food range -> ads banner -> pre/intra workout -> brand range
+ */
 const Landing = () => {
   return (
     <>
       <SEO />
-      <main className="w-full bg-[#faf8f6]">
-        {/* 1. Hero Carousel + Feature Bar (Free Shipping, Lab Tested, FSSAI, Pan-India) */}
-        <HeroSectionWithIcons />
-
-        {/* 2. Welcome First Order Voucher (Unlock 10% Off) */}
-        <AthleteCircleSection />
-
-        {/* 3. Shop By Category (Visual category navigation cards) */}
+      <main className="w-full bg-white">
+        <HeroSection />
         <SeasonFavoritesSection />
-
-        {/* 4. Promotional Banner Slider (Placed directly below Trending Deals of the Week) */}
-        <PromoBannerSlider />
-
-        {/* 5. Flash Sale & Trending Deals (Trending Deals of the Week) */}
-        <TrendingDealsSection />
-
-        {/* 6. Green Discount Strip Banner */}
+        <PromoBannerCarousel />
+        <TopProductsSection />
         <NutritionPromoBannerSlider />
-
-
-        {/* 7. Best Sellers (Flagship product rail with live ratings & Add to Cart) */}
-        <BestSellingSection />
-
-        {/* 8. Official Brand Partner Showcase (Company Advertisement Banner + Top 5 Products) */}
-        <BrandCompanyShowcaseSection />
-
-
-        {/* 11. Bank & Payment Offers Carousel */}
-        <BankOffersBannerSlider />
-
-        {/* 12. 100% Label Transparency & Scoop Breakdown */}
-        <TransparencySection />
-
-        {/* 13. Batch Verification & Official NABL Lab Report */}
-        <TrustAndGoalSection />
-
-        {/* 14. Verified Customer Reviews & Testimonials */}
-        <CustomerReviewsHome />
-
-        {/* 15. B2B Wholesale & Gym Supply Partnerships */}
-        <TrustExpertsSection />
-
-        {/* 16. Frequently Asked Questions */}
-        <FAQSection />
+        <TopProteinPicksSection />
+        <DailyWellnessSection />
+        <FitFoodRangeSection />
+        <AdsBannerSection />
+        <PreIntraWorkoutSection />
+        <BrandRangeSection />
       </main>
+      <BlackFeatureBar />
     </>
   );
 };
