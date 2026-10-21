@@ -150,9 +150,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="h-screen max-h-screen w-full flex bg-[#f6f7fa] text-text overflow-hidden">
+    <div className="min-h-screen w-full flex bg-[#f6f7fa] text-text">
       {/* ── LEFT PANEL: Authentic Athletic Brand Showcase (Desktop) ── */}
-      <div className="hidden lg:flex flex-col justify-between w-[48%] xl:w-[46%] h-full relative overflow-hidden p-8 xl:p-12 bg-gradient-to-br from-[#f1f4f9] via-[#f8fafc] to-[#e8edf6] border-r border-border text-text select-none shrink-0">
+      <div className="hidden lg:flex flex-col justify-between w-[48%] xl:w-[46%] min-h-screen relative overflow-hidden p-6 lg:p-8 xl:p-12 bg-gradient-to-br from-[#f1f4f9] via-[#f8fafc] to-[#e8edf6] border-r border-border text-text select-none shrink-0">
         {/* Subtle Ambient Radial Lighting */}
         <div
           className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-primary/5 blur-3xl"
@@ -288,13 +288,13 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* ── RIGHT PANEL: Interactive Registration Card (No Scroll) ── */}
-      <div className="flex-1 h-full flex flex-col justify-center items-center px-4 sm:px-8 py-3 lg:py-4 relative overflow-y-auto lg:overflow-hidden">
+      {/* ── RIGHT PANEL: Interactive Registration Card ── */}
+      <div className="flex-1 w-full min-h-screen flex flex-col justify-center items-center px-3 sm:px-6 md:px-8 py-4 sm:py-6 relative overflow-y-auto">
         {/* Top Navigation Row: Back to store */}
-        <div className="w-full max-w-[440px] flex items-center justify-between mb-2.5 shrink-0">
+        <div className="w-full max-w-[440px] flex items-center justify-between mb-2 shrink-0">
           <button
             onClick={() => navigate("/")}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-text-light hover:text-primary transition-colors py-1 px-2 rounded-lg hover:bg-black/[0.03] cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-text-light hover:text-primary transition-colors py-1.5 px-2.5 rounded-lg hover:bg-black/[0.03] cursor-pointer active:scale-95"
           >
             <ArrowLeft size={14} />
             Back to store
@@ -302,7 +302,7 @@ export default function RegisterPage() {
         </div>
 
         {/* Registration Card Container */}
-        <div className="w-full max-w-[440px] bg-white rounded-2xl shadow-lg shadow-black/[0.03] border border-border p-5 sm:p-6 xl:p-7 flex flex-col gap-3 shrink-0">
+        <div className="w-full max-w-[440px] bg-white rounded-2xl shadow-sm sm:shadow-lg shadow-black/[0.03] border border-border p-4 sm:p-6 xl:p-7 flex flex-col gap-3 my-auto">
           {/* Header */}
           <div className="flex flex-col items-center text-center gap-1">
             <Link to="/" className="inline-block mb-0.5" aria-label="Gomzi Nutrition Home">
@@ -408,7 +408,7 @@ export default function RegisterPage() {
                     onChange={(e) => handleChange("first_name", e.target.value)}
                     onFocus={() => handleFocus("first_name")}
                     onBlur={() => handleBlur("first_name")}
-                    className="w-full bg-transparent outline-none text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
+                    className="w-full min-w-0 bg-transparent outline-none text-base sm:text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -437,7 +437,7 @@ export default function RegisterPage() {
                     onChange={(e) => handleChange("last_name", e.target.value)}
                     onFocus={() => handleFocus("last_name")}
                     onBlur={() => handleBlur("last_name")}
-                    className="w-full bg-transparent outline-none text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
+                    className="w-full min-w-0 bg-transparent outline-none text-base sm:text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -470,7 +470,7 @@ export default function RegisterPage() {
                     onChange={(e) => handleChange("email", e.target.value)}
                     onFocus={() => handleFocus("email")}
                     onBlur={() => handleBlur("email")}
-                    className="w-full bg-transparent outline-none text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
+                    className="w-full min-w-0 bg-transparent outline-none text-base sm:text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -500,7 +500,7 @@ export default function RegisterPage() {
                     onChange={(e) => handleChange("mobile", e.target.value)}
                     onFocus={() => handleFocus("mobile")}
                     onBlur={() => handleBlur("mobile")}
-                    className="w-full bg-transparent outline-none text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
+                    className="w-full min-w-0 bg-transparent outline-none text-base sm:text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -547,7 +547,7 @@ export default function RegisterPage() {
                     onFocus={() => handleFocus("birth_date")}
                     onBlur={() => handleBlur("birth_date")}
                     maxLength={14}
-                    className="w-full bg-transparent outline-none text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
+                    className="w-full min-w-0 bg-transparent outline-none text-base sm:text-xs px-2 py-2 text-gray-900 placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -580,12 +580,12 @@ export default function RegisterPage() {
                     }}
                     onFocus={() => handleFocus("password")}
                     onBlur={() => handleBlur("password")}
-                    className="w-full bg-transparent outline-none text-xs px-2 py-2 pr-8 text-gray-900 placeholder:text-gray-400"
+                    className="w-full min-w-0 bg-transparent outline-none text-base sm:text-xs px-2 py-2 pr-8 text-gray-900 placeholder:text-gray-400"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-2 text-gray-400 hover:text-gray-600 transition-colors p-1"
+                    className="absolute right-1 text-gray-400 hover:text-gray-600 transition-colors p-2 min-w-[34px] min-h-[34px] flex items-center justify-center active:scale-90"
                   >
                     {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
                   </button>

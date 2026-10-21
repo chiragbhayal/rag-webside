@@ -367,12 +367,12 @@ export default function LoginPage() {
       </div>
 
       {/* ── RIGHT PANEL: Clean, High-Conversion E-Commerce Auth Portal ── */}
-      <div className="flex-1 flex flex-col justify-between items-center px-4 sm:px-8 py-6 sm:py-10 overflow-y-auto">
+      <div className="flex-1 w-full min-h-screen flex flex-col justify-between items-center px-3 sm:px-6 md:px-8 py-4 sm:py-8 overflow-y-auto">
         {/* Top Navigation Bar */}
-        <div className="w-full max-w-[440px] flex items-center justify-between shrink-0 mb-4 sm:mb-6">
+        <div className="w-full max-w-[440px] flex items-center justify-between shrink-0 mb-3 sm:mb-5">
           <button
             onClick={() => navigate("/")}
-            className="inline-flex items-center gap-2 text-xs font-semibold text-text-light hover:text-primary transition-colors py-2 px-3 rounded-lg hover:bg-black/5 cursor-pointer"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-text-light hover:text-primary transition-colors py-2 px-3 rounded-lg hover:bg-black/5 cursor-pointer active:scale-95"
           >
             <ArrowLeft size={15} />
             <span>Back to Store</span>
@@ -380,7 +380,7 @@ export default function LoginPage() {
         </div>
 
         {/* Auth Main Card */}
-        <div className="w-full max-w-[440px] bg-white rounded-2xl border border-border p-7 sm:p-9 shadow-lg shadow-black/[0.03] my-auto flex flex-col gap-5">
+        <div className="w-full max-w-[440px] bg-white rounded-2xl border border-border p-5 sm:p-8 shadow-sm sm:shadow-lg shadow-black/[0.03] my-auto flex flex-col gap-4 sm:gap-5">
           {/* Header */}
           <div className="flex flex-col items-center text-center gap-2">
             <Link to="/" className="inline-block mb-1" aria-label="Gomzi Nutrition Home">
@@ -509,7 +509,7 @@ export default function LoginPage() {
                     onChange={(e) => setIdentifier(e.target.value)}
                     onFocus={() => setIdentifierFocused(true)}
                     onBlur={() => setIdentifierFocused(false)}
-                    className="w-full bg-transparent outline-none text-xs sm:text-sm px-2 py-3 text-text placeholder:text-text-muted disabled:bg-gray-50 disabled:text-text-muted rounded-xl"
+                    className="w-full bg-transparent outline-none text-base sm:text-sm px-2.5 py-2.5 sm:py-3 text-text placeholder:text-text-muted disabled:bg-gray-50 disabled:text-text-muted rounded-xl"
                   />
                 </div>
               </div>
@@ -626,7 +626,7 @@ export default function LoginPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     onFocus={() => setEmailFocused(true)}
                     onBlur={() => setEmailFocused(false)}
-                    className="w-full bg-transparent outline-none text-xs sm:text-sm px-3 py-3 text-text placeholder:text-text-muted"
+                    className="w-full bg-transparent outline-none text-base sm:text-sm px-3 py-2.5 sm:py-3 text-text placeholder:text-text-muted"
                   />
                 </div>
               </div>
@@ -659,12 +659,12 @@ export default function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     onFocus={() => setPasswordFocused(true)}
                     onBlur={() => setPasswordFocused(false)}
-                    className="w-full bg-transparent outline-none text-xs sm:text-sm px-3 py-3 pr-10 text-text placeholder:text-text-muted"
+                    className="w-full bg-transparent outline-none text-base sm:text-sm px-3 py-2.5 sm:py-3 pr-10 text-text placeholder:text-text-muted"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 text-text-muted hover:text-text transition-colors p-1 cursor-pointer"
+                    className="absolute right-1 text-text-muted hover:text-text transition-colors p-2 min-w-[36px] min-h-[36px] flex items-center justify-center cursor-pointer active:scale-90"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
