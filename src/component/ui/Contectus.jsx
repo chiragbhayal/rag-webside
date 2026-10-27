@@ -181,23 +181,7 @@ export default function ContactSection() {
       {/* ── 1. HERO BANNER ── */}
       <section className="w-full border-b border-border bg-white">
         <div className="max-w-[1170px] mx-auto px-4 md:px-0 py-8 text-center">
-          {/* Breadcrumb Navigation */}
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-2 flex items-center justify-center gap-1.5 text-xs text-text-light"
-          >
-            <Link to="/" className="transition-colors hover:text-primary">
-              Home
-            </Link>
-            <ChevronRight size={12} className="text-text-muted" />
-            <span className="font-medium text-text">Contact &amp; Support</span>
-          </nav>
 
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary-light px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary mb-3">
-            <Sparkles size={12} className="text-primary" />
-            <span>Surat Manufacturing Hub • Direct Customer Support</span>
-          </div>
 
           {/* Heading */}
           <h1 className="text-3xl font-semibold tracking-tight text-text sm:text-4xl md:text-[40px] leading-tight">
@@ -375,7 +359,7 @@ export default function ContactSection() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left: Inquiry Form */}
             <div className="lg:col-span-7">
-              <div className="group/form relative overflow-hidden p-7 sm:p-10 rounded-3xl bg-bg-cream border border-primary-border shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(92,49,36,0.08)] hover:border-amber-400/40 transition-all duration-300">
+              <div className="group/form relative p-7 sm:p-10 rounded-3xl bg-bg-cream border border-primary-border shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(92,49,36,0.08)] hover:border-amber-400/40 transition-all duration-300">
                 <span className="text-xs font-bold uppercase tracking-widest text-primary">
                   Send a Direct Message
                 </span>
@@ -472,12 +456,15 @@ export default function ContactSection() {
                       const ActiveIcon = currentCategory.icon;
 
                       return (
-                        <div className="relative" ref={dropdownRef}>
+                        <div
+                          className={`relative ${isDropdownOpen ? "z-30" : "z-10"}`}
+                          ref={dropdownRef}
+                        >
                           <div className="flex items-center justify-between mb-1.5">
                             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
                               Select Inquiry Category <span className="text-red-500">*</span>
                             </label>
-                            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-primary bg-primary/8 px-2 py-0.5 rounded-full border border-primary/10">
+                            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary bg-primary/10 px-2.5 py-0.5 rounded-full border border-primary/20">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#ff8914]" />
                               {currentCategory.tag}
                             </span>
@@ -492,28 +479,28 @@ export default function ContactSection() {
                             }}
                             aria-haspopup="listbox"
                             aria-expanded={isDropdownOpen}
-                            className={`w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-white border text-left transition-all duration-200 flex items-center justify-between shadow-2xs cursor-pointer ${
+                            className={`w-full px-4 py-3 rounded-xl bg-white border text-left transition-all duration-200 flex items-center justify-between shadow-2xs cursor-pointer ${
                               isDropdownOpen
-                                ? "border-primary ring-2 ring-primary/10 bg-[#fffcf9]"
-                                : "border-primary-border hover:border-primary/40 hover:bg-[#fffcf9]"
+                                ? "border-primary ring-2 ring-primary/15 bg-white"
+                                : "border-primary-border hover:border-primary/50 hover:bg-[#fffcf9]"
                             }`}
                           >
                             <div className="flex items-center gap-3 min-w-0">
-                              <div className="w-8 h-8 rounded-lg bg-primary/8 text-primary flex items-center justify-center shrink-0 border border-primary/10">
-                                <ActiveIcon size={16} />
+                              <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/15">
+                                <ActiveIcon size={17} />
                               </div>
                               <div className="flex flex-col min-w-0">
                                 <span className="text-xs font-bold text-gray-900 truncate">
                                   {currentCategory.label}
                                 </span>
-                                <span className="text-[10px] text-gray-400 font-light truncate hidden sm:block">
+                                <span className="text-[11px] text-gray-500 font-light truncate hidden sm:block">
                                   {currentCategory.desc}
                                 </span>
                               </div>
                             </div>
 
                             <ChevronDown
-                              size={16}
+                              size={17}
                               className={`text-gray-400 shrink-0 ml-2 transition-transform duration-200 ${
                                 isDropdownOpen ? "rotate-180 text-primary" : ""
                               }`}
@@ -524,13 +511,14 @@ export default function ContactSection() {
                           {isDropdownOpen && (
                             <div
                               role="listbox"
-                              className="absolute left-0 right-0 top-full mt-2 z-50 bg-white/98 backdrop-blur-md border border-primary-border rounded-2xl shadow-[0_20px_40px_-10px_rgba(92,49,36,0.18),0_4px_12px_rgba(0,0,0,0.04)] p-1.5 overflow-hidden animate-in fade-in duration-150"
+                              className="absolute left-0 right-0 top-full mt-2 z-50 bg-white border border-[#e8ded7] rounded-2xl shadow-[0_20px_48px_-10px_rgba(92,49,36,0.18),0_4px_16px_rgba(0,0,0,0.06)] p-2 animate-in fade-in zoom-in-95 duration-150"
                             >
-                              <div className="px-3 py-1.5 text-[10px] font-bold tracking-wider text-gray-400 uppercase border-b border-primary-border/50 mb-1">
-                                Inquiry Topic • Select Category
+                              <div className="px-3 py-1.5 text-[10px] font-bold tracking-wider text-gray-400 uppercase border-b border-gray-100 mb-1.5 flex items-center justify-between">
+                                <span>Inquiry Topic • Select Category</span>
+                                <span className="text-[9px] font-normal lowercase tracking-normal text-gray-400">5 departments</span>
                               </div>
 
-                              <div className="space-y-1 max-h-72 overflow-y-auto pr-0.5">
+                              <div className="space-y-1.5 max-h-[380px] overflow-y-auto pr-0.5">
                                 {inquiryCategories.map((item) => {
                                   const isSelected = selectedTopic === item.label;
                                   const IconComponent = item.icon;
@@ -544,9 +532,9 @@ export default function ContactSection() {
                                         setSelectedTopic(item.label);
                                         setIsDropdownOpen(false);
                                       }}
-                                      className={`group flex items-center justify-between p-2.5 sm:p-3 rounded-xl cursor-pointer transition-all duration-150 ${
+                                      className={`group flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all duration-150 ${
                                         isSelected
-                                          ? "bg-primary/8 border border-primary/20 shadow-2xs"
+                                          ? "bg-primary/8 border border-primary/25 shadow-xs"
                                           : "hover:bg-[#faf6f3] border border-transparent"
                                       }`}
                                     >
@@ -569,13 +557,13 @@ export default function ContactSection() {
                                           >
                                             {item.label}
                                           </span>
-                                          <span className="text-[10px] text-gray-500 font-light leading-tight mt-0.5">
+                                          <span className="text-[11px] text-gray-500 font-light leading-tight mt-0.5">
                                             {item.desc}
                                           </span>
                                         </div>
                                       </div>
 
-                                      <div className="flex items-center gap-2 shrink-0 ml-2">
+                                      <div className="flex items-center gap-2 shrink-0 ml-3">
                                         <span
                                           className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider hidden sm:inline-block ${
                                             isSelected
@@ -587,7 +575,7 @@ export default function ContactSection() {
                                         </span>
 
                                         {isSelected && (
-                                          <div className="w-5 h-5 rounded-full bg-primary text-white flex items-center justify-center shadow-2xs">
+                                          <div className="w-5 h-5 rounded-full bg-primary text-white flex items-center justify-center shadow-xs">
                                             <Check size={12} strokeWidth={3} />
                                           </div>
                                         )}

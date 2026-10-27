@@ -15,7 +15,6 @@ import { fetchProducts } from "../../services/product.service";
 import CartPopover from "./CartPopover";
 import MegaMenu from "./MegaMenu";
 import {
-  NAVIGATION_DEPARTMENTS,
   HEADER_NAV_LINKS,
   QUICK_NAV_LINKS,
 } from "../../data/navigationCategories";
@@ -49,7 +48,6 @@ export default function Navbar() {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-  const [mobileExpandedDept, setMobileExpandedDept] = useState(null);
 
   // Popover Timer ref for smooth hover transitions without flickering
   const cartTimerRef = useRef(null);
@@ -636,65 +634,6 @@ export default function Navbar() {
 
             {/* Drawer Scrollable Content */}
             <div className="flex-1 overflow-y-auto divide-y divide-gray-100 scrollbar-thin">
-              {/* Category Hierarchy Accordion */}
-              <div className="py-2">
-                <div className="px-4 py-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                  Shop By Category
-                </div>
-
-                {NAVIGATION_DEPARTMENTS.map((dept) => {
-                  const isExpanded = mobileExpandedDept === dept.id;
-
-                  return (
-                    <div key={dept.id} className="border-b border-gray-50 last:border-none">
-                      <button
-                        onClick={() =>
-                          setMobileExpandedDept(isExpanded ? null : dept.id)
-                        }
-                        className="w-full px-4 py-3 text-xs font-bold text-text flex items-center justify-between hover:bg-gray-50 transition-colors bg-transparent border-none cursor-pointer"
-                      >
-                        <span className="truncate">{dept.name}</span>
-                        <ChevronDown
-                          className={`w-4 h-4 text-gray-400 transition-transform ${
-                            isExpanded ? "rotate-180 text-primary" : ""
-                          }`}
-                        />
-                      </button>
-
-                      {isExpanded && (
-                        <div className="bg-[#f8fafb] px-4 py-2 space-y-3">
-                          {dept.groups.map((group) => (
-                            <div key={group.slug} className="space-y-1.5">
-                              <p className="text-[11px] font-bold text-primary uppercase tracking-wide">
-                                {group.title}
-                              </p>
-                              <div className="space-y-1 pl-2">
-                                {group.items.map((item) => (
-                                  <button
-                                    key={item.name}
-                                    onClick={() => {
-                                      setDrawerOpen(false);
-                                      navigate(
-                                        `/gomzi-supplement?search=${encodeURIComponent(
-                                          item.query,
-                                        )}`,
-                                      );
-                                    }}
-                                    className="w-full text-left py-1 text-xs text-[#515151] hover:text-primary bg-transparent border-none cursor-pointer block"
-                                  >
-                                    {item.name}
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-
               {/* Standard Page Links */}
               <div className="py-2">
                 <div className="px-4 py-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider">

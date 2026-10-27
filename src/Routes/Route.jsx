@@ -1,4 +1,5 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
+import ScrollToTop from "../component/common/ScrollToTop";
 import Wrapper from "../HOC/Wrapper";
 import Landing from "../pages/Landing";
 import Allproducts from "../pages/Allproducts";
@@ -25,14 +26,24 @@ import ShippingPolicy from "../pages/About/DeliveryPolicy";
 import CategoriesSection from "../pages/Categories";
 import WholesaleB2B from "../pages/WholesaleB2B";
 
+const RootLayout = () => (
+  <>
+    <ScrollToTop />
+    <Outlet />
+  </>
+);
+
 export const Route = createBrowserRouter([
   {
-    element: <Wrapper />,
+    element: <RootLayout />,
     children: [
       {
-        path: "/",
-        element: <Landing />,
-      },
+        element: <Wrapper />,
+        children: [
+          {
+            path: "/",
+            element: <Landing />,
+          },
 
       {
         path: "/gomzi-supplement",
@@ -180,5 +191,7 @@ export const Route = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+    ],
   },
 ]);

@@ -29,7 +29,7 @@ export default function SectionHeader({
       </div>
 
       {tabs?.length > 0 && (
-        <div className="mt-4 flex flex-wrap gap-7">
+        <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:gap-3">
           {tabs.map((tab) => {
             const active = tab.id === activeTab;
             return (

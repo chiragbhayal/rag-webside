@@ -216,9 +216,9 @@ export default function BlogPage() {
       {/* ── 2. SEARCH & FILTER COMMAND BAR ── */}
       <section className="sticky top-0 z-30 bg-bg-cream/95 backdrop-blur-md border-b border-primary-border py-4 transition-all shadow-sm">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            {/* Category Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+            {/* Category Pills (centered horizontally, wraps into 2 lines on smaller screens) */}
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 w-full">
               {filterCategories.map((cat) => {
                 const isActive = selectedCategory === cat.id;
                 const count = getCategoryCount(cat.id);
@@ -227,7 +227,7 @@ export default function BlogPage() {
                   <button
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`group relative overflow-hidden inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 whitespace-nowrap active:scale-[0.98] cursor-pointer ${
+                    className={`group relative overflow-hidden inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all duration-300 active:scale-[0.98] cursor-pointer ${
                       isActive
                         ? "btn-gradient text-white shadow-md shadow-primary/25 border border-amber-400/30"
                         : "bg-white text-gray-700 border border-primary-border hover:border-primary/40 hover:bg-[#fdfbf9]"
@@ -249,7 +249,7 @@ export default function BlogPage() {
             </div>
 
             {/* Live Search Input */}
-            <div className="relative w-full md:w-80">
+            <div className="relative w-full md:w-80 shrink-0">
               <Search
                 size={16}
                 className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"

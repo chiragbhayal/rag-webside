@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
 
-    <link rel="icon" type="image/svg+xml" href="/images/rag-logo.webp" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -56,6 +58,14 @@
       }
     </script>
     <!-- End Meta Pixel Code -->
+
+    <!-- Force Scroll to Top on Page Refresh & Reload -->
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    </script>
   </head>
 
   <body>

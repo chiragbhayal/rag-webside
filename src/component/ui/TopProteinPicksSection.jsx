@@ -1,228 +1,132 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+
 import ProductCard from "../common/ProductCard";
 import SectionHeader from "../common/SectionHeader";
-
-const TABS = [
-  { id: "yeast-plant", label: "Yeast / Plant" },
-  { id: "whey", label: "Whey" },
-  { id: "whey-isolate", label: "Whey Isolate" },
-  { id: "us-imported", label: "US Imported" },
-];
-
-const PROTEIN_PRODUCTS = {
-  "yeast-plant": [
-    {
-      id: "mb-yeast-protein-2-2",
-      name: "MuscleBlaze Yeast Protein, 2.2 lb Rich Chocolate",
-      badge: "Trending Now",
-      rating: 4.4,
-      price: 2099,
-      originalPrice: 2899,
-      premiumPrice: 2036,
-      image: "/images/product-category/plant-protein.webp",
-      url: "/gomzi-supplement?search=yeast+protein",
-    },
-    {
-      id: "gnc-plant-protein-isolate",
-      name: "GNC Plant Protein Isolate, 2 lb Chocolate Hazelnut",
-      rating: 4.9,
-      price: 1399,
-      originalPrice: 2399,
-      premiumPrice: 1329,
-      image: "/images/product-category/plant-protein.webp",
-      url: "/gomzi-supplement?search=gnc+plant",
-    },
-    {
-      id: "truebasics-clean-plant-protein",
-      name: "TrueBasics Clean Plant Protein, 2.2 lb Chocolate",
-      badge: "Trustified",
-      rating: 4.6,
-      price: 2099,
-      originalPrice: 2999,
-      premiumPrice: 2036,
-      image: "/images/product-category/protein-1.jpg",
-      url: "/gomzi-supplement?search=clean+plant",
-    },
-    {
-      id: "cosmix-fermented-yeast-protein",
-      name: "Cosmix Fermented Yeast Protein, 2.2 lb Indonesian Cacao",
-      rating: 4.8,
-      price: 1999,
-      originalPrice: 3250,
-      premiumPrice: 1939,
-      image: "/images/deals/picks/nakpro-deal.png",
-      url: "/gomzi-supplement?search=cosmix+yeast",
-    },
-    {
-      id: "gomzi-plant-superfood-isolate",
-      name: "Gomzi Nutrition Superfood Plant Protein Isolate, 2 lb Belgian Chocolate",
-      badge: "Bestseller",
-      rating: 4.8,
-      price: 1899,
-      originalPrice: 2599,
-      premiumPrice: 1842,
-      image: "/images/protein-removebg.png",
-      url: "/gomzi-supplement?search=plant",
-    },
-  ],
-  whey: [
-    {
-      id: "mb-biozyme-perf-whey",
-      name: "MuscleBlaze Biozyme Performance Whey, 4.4 lb Rich Chocolate",
-      badge: "Trending Now",
-      rating: 4.5,
-      price: 4329,
-      originalPrice: 4629,
-      premiumPrice: 4199,
-      image: "/images/deals/whey-range-deal.jpg",
-      url: "/gomzi-supplement?search=biozyme+whey",
-    },
-    {
-      id: "on-gold-standard-whey",
-      name: "Optimum Nutrition (ON) Gold Standard 100% Whey, 5 lb Double Rich Chocolate",
-      badge: "Bestseller",
-      rating: 4.8,
-      price: 6499,
-      originalPrice: 7999,
-      premiumPrice: 6299,
-      image: "/images/product-category/whey-protein.webp",
-      url: "/gomzi-supplement?search=optimum+nutrition",
-    },
-    {
-      id: "nakpro-platinum-whey",
-      name: "Nakpro Platinum 100% Whey Protein Concentrate, 2.2 lb Chocolate",
-      rating: 4.4,
-      price: 1899,
-      originalPrice: 2499,
-      premiumPrice: 1842,
-      image: "/images/deals/picks/nakpro-deal.png",
-      url: "/gomzi-supplement?search=nakpro",
-    },
-    {
-      id: "asitis-whey-80",
-      name: "AS-IT-IS Nutrition Whey Protein Concentrate 80%, 2.2 lb Raw Unflavoured",
-      rating: 4.3,
-      price: 1549,
-      originalPrice: 1999,
-      premiumPrice: 1499,
-      image: "/images/protein.jpg",
-      url: "/gomzi-supplement?search=asitis",
-    },
-    {
-      id: "gomzi-raw-whey-blend",
-      name: "Gomzi 100% Raw Whey Blend, 2.2 lb Swiss Chocolate",
-      badge: "Lab Verified",
-      rating: 4.7,
-      price: 2199,
-      originalPrice: 2999,
-      premiumPrice: 2133,
-      image: "/images/Gomzi_Protein_Product_HD.webp",
-      url: "/gomzi-supplement?search=whey",
-    },
-  ],
-  "whey-isolate": [
-    {
-      id: "mb-biozyme-iso-zero",
-      name: "MuscleBlaze Biozyme Iso-Zero, 4.4 lb Low Carb Chocolate",
-      badge: "Trending Now",
-      rating: 4.7,
-      price: 5499,
-      originalPrice: 6499,
-      premiumPrice: 5334,
-      image: "/images/deals/whey-range-deal.jpg",
-      url: "/gomzi-supplement?search=iso+zero",
-    },
-    {
-      id: "dymatize-iso-100",
-      name: "Dymatize ISO 100 Whey Protein Isolate, 5 lb Gourmet Chocolate",
-      badge: "Trustified",
-      rating: 4.9,
-      price: 7999,
-      originalPrice: 9999,
-      premiumPrice: 7759,
-      image: "/images/deals/picks/muscletech-deal.png",
-      url: "/gomzi-supplement?search=dymatize+iso",
-    },
-    {
-      id: "on-gold-isolate",
-      name: "Optimum Nutrition (ON) Gold Standard 100% Isolate, 5 lb Chocolate Bliss",
-      rating: 4.8,
-      price: 7299,
-      originalPrice: 8999,
-      premiumPrice: 7080,
-      image: "/images/product-category/whey-protein.webp",
-      url: "/gomzi-supplement?search=on+isolate",
-    },
-    {
-      id: "one-science-iso-gold",
-      name: "One Science 100% ISO Gold Whey Protein Isolate, 5 lb Rich Chocolate",
-      rating: 4.6,
-      price: 6199,
-      originalPrice: 7799,
-      premiumPrice: 6013,
-      image: "/images/deals/picks/one-science-deal.png",
-      url: "/gomzi-supplement?search=one+science",
-    },
-  ],
-  "us-imported": [
-    {
-      id: "dymatize-iso-fudge",
-      name: "Dymatize ISO 100 Hydrolyzed 100% Whey Isolate, 5 lb Fudge Brownie",
-      badge: "Imported",
-      rating: 4.9,
-      price: 8199,
-      originalPrice: 10499,
-      premiumPrice: 7953,
-      image: "/images/deals/picks/muscletech-deal.png",
-      url: "/gomzi-supplement?search=dymatize",
-    },
-    {
-      id: "on-standard-5lb",
-      name: "Optimum Nutrition Gold Standard Whey, 5 lb Double Rich Chocolate (US)",
-      badge: "Top Rated",
-      rating: 4.8,
-      price: 6599,
-      originalPrice: 8199,
-      premiumPrice: 6399,
-      image: "/images/product-category/whey-protein.webp",
-      url: "/gomzi-supplement?search=optimum+nutrition",
-    },
-    {
-      id: "rule1-r1-protein",
-      name: "Rule 1 R1 Protein WPI Blend, 5 lb Chocolate Fudge",
-      rating: 4.7,
-      price: 6499,
-      originalPrice: 7999,
-      premiumPrice: 6304,
-      image: "/images/deals/picks/labrada-deal.png",
-      url: "/gomzi-supplement?search=rule1",
-    },
-    {
-      id: "muscletech-nitrotech-gold",
-      name: "MuscleTech NitroTech 100% Whey Gold, 5 lb Double Rich Chocolate",
-      rating: 4.6,
-      price: 5799,
-      originalPrice: 7299,
-      premiumPrice: 5625,
-      image: "/images/deals/picks/muscletech-deal.png",
-      url: "/gomzi-supplement?search=muscletech",
-    },
-  ],
-};
+import { ProductCardSkeleton } from "../common/SkeletonLoaders";
+import { getProductsApi } from "../../api/product.api";
+import { getProductImageUrl } from "../../utils/productAdapter";
 
 /**
- * HealthKart-identical "Top Protein Picks" Product Rail.
- *
- * Features:
- * - Clean title & category filter tabs (Yeast / Plant, Whey, Whey Isolate, US Imported)
- * - Swiper product rail, 4 per view on desktop
+ * Tab definitions with corresponding query parameters for the /public/v1/products API
+ * which powers the /gomzi-supplement store page.
+ */
+const TABS = [
+  {
+    id: "yeast-plant",
+    label: "Yeast / Plant",
+    query: { category: "Plant Protein", limit: 12 },
+    targetUrl: "/gomzi-supplement?category=Plant+Protein",
+  },
+  {
+    id: "whey",
+    label: "Whey",
+    query: { category: "Whey Protein", limit: 12 },
+    targetUrl: "/gomzi-supplement?category=Whey+Protein",
+  },
+  {
+    id: "whey-isolate",
+    label: "Whey Isolate",
+    query: { category: "Whey Protein", search: "isolate", limit: 12 },
+    targetUrl: "/gomzi-supplement?category=Whey+Protein&search=isolate",
+  },
+  {
+    id: "us-imported",
+    label: "US Imported",
+    query: { search: "optimum", limit: 12 },
+    targetUrl: "/gomzi-supplement?search=Optimum+Nutrition",
+  },
+];
+
+/**
+ * Top Protein Picks Section.
+ * Fetches dynamic live product data from the /gomzi-supplement catalog API.
+ * All static mock product data has been removed.
  */
 export default function TopProteinPicksSection() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("yeast-plant");
+  const [productsCache, setProductsCache] = useState({});
+  const [fetching, setFetching] = useState(true);
 
-  const currentProducts = PROTEIN_PRODUCTS[activeTab] || [];
+  const activeTabConfig = TABS.find((t) => t.id === activeTab) || TABS[0];
+  const currentProducts = productsCache[activeTab] || [];
+  const loading = currentProducts.length === 0 && fetching;
+
+  useEffect(() => {
+    let isMounted = true;
+
+    // Skip API call if products are already cached for this tab
+    if (productsCache[activeTab]?.length > 0) {
+      return;
+    }
+
+    const fetchTabProducts = async () => {
+      setFetching(true);
+      try {
+        const res = await getProductsApi(activeTabConfig.query);
+        if (!isMounted) return;
+
+        let list = Array.isArray(res?.data?.data) ? res.data.data : [];
+
+        // Fallback: if query returned 0 items, fetch general protein products
+        if (list.length === 0) {
+          const fallbackRes = await getProductsApi({ category: "Whey Protein", limit: 12 });
+          if (Array.isArray(fallbackRes?.data?.data) && fallbackRes.data.data.length > 0) {
+            list = fallbackRes.data.data;
+          }
+        }
+
+        const normalised = list
+          .filter((p) => p && p.name && (p.is_deleted !== true) && (p.isAvailable !== false))
+          .map((p) => {
+            const rawSellingPrice = Number(p.sellingPrice || p.discountPrice || p.price || 0);
+            const rawOriginalPrice = Number(p.price || 0);
+
+            return {
+              id: p._id || p.id,
+              _id: p._id || p.id,
+              slug: p.slug || p._id || p.id,
+              name: p.name,
+              image: getProductImageUrl(p),
+              price: rawSellingPrice,
+              originalPrice: rawOriginalPrice > rawSellingPrice ? rawOriginalPrice : Math.round(rawSellingPrice * 1.3),
+              premiumPrice: Math.round(rawSellingPrice * 0.97),
+              rating: Number(p.rating?.average) || 4.6,
+              reviews: Number(p.rating?.totalReviews) || 15,
+              badge: p.badges?.[0] || (p.discountPrice && p.price > p.discountPrice ? "Special Offer" : null),
+              url: `/product/${p.slug || p._id || p.id}`,
+              raw: p,
+            };
+          });
+
+        if (isMounted) {
+          setProductsCache((prev) => ({
+            ...prev,
+            [activeTab]: normalised,
+          }));
+        }
+      } catch (err) {
+        console.error(`Failed to fetch protein products for tab ${activeTab}:`, err);
+      } finally {
+        if (isMounted) {
+          setFetching(false);
+        }
+      }
+    };
+
+    fetchTabProducts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [activeTab, activeTabConfig, productsCache]);
+
+  const handleViewAll = () => {
+    navigate(activeTabConfig.targetUrl || "/gomzi-supplement");
+  };
 
   return (
     <section className="w-full bg-white" aria-label="Top Protein Picks">
@@ -232,26 +136,60 @@ export default function TopProteinPicksSection() {
           tabs={TABS}
           activeTab={activeTab}
           onTabChange={setActiveTab}
+          onViewAll={handleViewAll}
+          showAllLabel="View All"
         />
 
-        {/* Carousel */}
-        <Swiper
-          spaceBetween={16}
-          slidesPerView={1.2}
-          breakpoints={{
-            480: { slidesPerView: 1.5, spaceBetween: 16 },
-            640: { slidesPerView: 2.2, spaceBetween: 18 },
-            768: { slidesPerView: 3, spaceBetween: 20 },
-            1024: { slidesPerView: 4, spaceBetween: 24 },
-          }}
-          className="pb-2"
-        >
-          {currentProducts.map((product) => (
-            <SwiperSlide key={product.id} className="h-auto">
-              <ProductCard product={product} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {loading ? (
+          /* Loading Skeletons matching exact product grid structure */
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+            {Array.from({ length: 4 }).map((_, idx) => (
+              <ProductCardSkeleton key={`top-protein-skeleton-${idx}`} />
+            ))}
+          </div>
+        ) : currentProducts.length === 0 ? (
+          <div className="text-center py-12 bg-neutral-50 rounded-xl">
+            <p className="text-neutral-500 font-medium">
+              No products found in this category currently.
+            </p>
+            <button
+              type="button"
+              onClick={() => navigate("/gomzi-supplement")}
+              className="mt-3 px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary-hover"
+            >
+              Explore Full Shop
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Mobile View: 2x2 Grid (4 products: 2 up and 2 down) */}
+            <div className="grid grid-cols-2 items-stretch gap-3 sm:hidden">
+              {currentProducts.slice(0, 4).map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+
+            {/* Tablet & Desktop View: Swiper Carousel */}
+            <div className="hidden sm:block">
+              <Swiper
+                spaceBetween={18}
+                slidesPerView={2.2}
+                breakpoints={{
+                  640: { slidesPerView: 2.2, spaceBetween: 18 },
+                  768: { slidesPerView: 3, spaceBetween: 20 },
+                  1024: { slidesPerView: 4, spaceBetween: 24 },
+                }}
+                className="pb-2"
+              >
+                {currentProducts.map((product) => (
+                  <SwiperSlide key={product.id} className="h-auto">
+                    <ProductCard product={product} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

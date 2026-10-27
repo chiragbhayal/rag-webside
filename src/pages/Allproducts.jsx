@@ -38,17 +38,35 @@ const Allproducts = () => {
       )
     : null;
 
+  const matchedSlugConfig = categorySlug ? categoryConfig[categorySlug] : null;
+
+  // Format slug to readable category title: e.g. "peanut-butter" -> "Peanut Butter"
+  const formattedCategoryFromSlug = categorySlug
+    ? categorySlug
+        .split("-")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ")
+    : "";
+
   /**
    * Priority:
    *
    * 1. Query category
-   * 2. URL slug
+   * 2. URL slug (static config or dynamic fallback for admin categories)
    * 3. Default
    */
   const pageData =
     queryCategoryConfig ||
-    (categorySlug ? categoryConfig[categorySlug] : null) ||
-    categoryConfig.default;
+    matchedSlugConfig ||
+    (categorySlug
+      ? {
+          ...categoryConfig.default,
+          slug: categorySlug,
+          category: formattedCategoryFromSlug,
+          heading: formattedCategoryFromSlug.toUpperCase(),
+          subHeading: `Science-Backed ${formattedCategoryFromSlug} Supplements`,
+        }
+      : categoryConfig.default);
 
   const pageTitle = isBestSeller
     ? "Best Sellers"
@@ -57,7 +75,7 @@ const Allproducts = () => {
       : selectedBrand
         ? `${selectedBrand} Collection`
         : categorySlug
-          ? pageData.heading || "Gomzi Supplement"
+          ? pageData.heading || formattedCategoryFromSlug || "Gomzi Supplement"
           : selectedCategory
             ? selectedCategory
             : rawSearch

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
-
 import { fetchProducts } from "../../services/product.service";
 import ProductCard from "../common/ProductCard";
 import SectionHeader from "../common/SectionHeader";
@@ -33,20 +31,26 @@ export default function DailyWellnessSection() {
 
         const list = Array.isArray(res.data) ? res.data : [];
         setProducts(
-          list.slice(0, 4).map((p, idx) => ({
-            id: p._id || `wellness-${idx}`,
-            slug: p.slug || p._id,
-            name: p.name,
-            image:
-              p.displayImages?.[0] ||
-              p.image ||
-              "/images/product-placeholder.webp",
-            price: Number(p.price || 0),
-            originalPrice: Number(p.price || 0) * 1.35,
-            rating: 4.4 + (idx % 3) * 0.1,
-            totalReviews: 300 + idx * 90,
-            raw: p,
-          }))
+          list.slice(0, 4).map((p, idx) => {
+            const selling = Number(p.sellingPrice || p.discountPrice || p.price || 0);
+            const original = Number(p.price || 0);
+            return {
+              id: p._id || `wellness-${idx}`,
+              slug: p.slug || p._id,
+              name: p.name,
+              image:
+                p.displayImages?.[0] ||
+                p.image ||
+                "/images/product-placeholder.webp",
+              price: selling,
+              originalPrice: original > selling ? original : selling * 1.25,
+              premiumPrice: Math.round(selling * 0.95),
+              rating: Number(p.rating?.average) || 4.5,
+              totalReviews: Number(p.rating?.totalReviews) || 0,
+              badge: p.badges?.[0] || undefined,
+              raw: p,
+            };
+          })
         );
       } catch {
         if (isMounted) setProducts([]);
@@ -69,6 +73,8 @@ export default function DailyWellnessSection() {
           tabs={TABS}
           activeTab={activeTab}
           onTabChange={setActiveTab}
+          onViewAll={() => navigate(`/gomzi-supplement?search=${activeTab === "omegas" ? "fish oil" : activeTab}`)}
+          showAllLabel="View All"
         />
 
         <div className="grid grid-cols-2 items-stretch gap-4 lg:grid-cols-4 lg:gap-5">
@@ -83,16 +89,6 @@ export default function DailyWellnessSection() {
                   badge={idx === 0 ? "Trending Now" : undefined}
                 />
               ))}
-        </div>
-
-        <div className="mt-8 flex justify-center">
-          <button
-            onClick={() => navigate("/gomzi-supplement?search=wellness")}
-            className="view-all"
-          >
-            View All
-            <ChevronRight className="h-3 w-3" />
-          </button>
         </div>
       </div>
     </section>

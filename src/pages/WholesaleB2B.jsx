@@ -20,6 +20,22 @@ import { FaWhatsapp } from "react-icons/fa";
 import SEO from "../component/SEO";
 import { sendContactInquiryApi } from "../api/contact.api";
 import { successToast, errorToast } from "../utils/toast";
+import CustomSelect from "../component/common/CustomSelect";
+
+const BUSINESS_TYPE_OPTIONS = [
+  { value: "Gym / Fitness Studio", label: "Gym / Fitness Studio" },
+  { value: "Nutrition & Supplement Store", label: "Nutrition & Supplement Store" },
+  { value: "CrossFit Box / MMA Academy", label: "CrossFit Box / MMA Academy" },
+  { value: "Personal Trainer / Fitness Coach", label: "Personal Trainer / Fitness Coach" },
+  { value: "Regional Distributor / Wholesaler", label: "Regional Distributor / Wholesaler" },
+];
+
+const ESTIMATED_VOLUME_OPTIONS = [
+  { value: "₹25,000 - ₹50,000", label: "₹25,000 - ₹50,000", subtitle: "Starter Tier" },
+  { value: "₹50,000 - ₹1,50,000", label: "₹50,000 - ₹1,50,000", subtitle: "Pro Fitness Center" },
+  { value: "₹1,50,000 - ₹5,00,000", label: "₹1,50,000 - ₹5,00,000", subtitle: "Multi-Branch Chain" },
+  { value: "₹5,00,000+", label: "₹5,00,000+", subtitle: "Master Regional Distributor" },
+];
 
 const B2B_BENEFITS = [
   {
@@ -192,18 +208,7 @@ export default function WholesaleB2B() {
         description="Equip your gym or retail store with certified Gomzi Nutrition sports supplements. Direct factory margins, pan-India bulk logistics, 100% certified stock, and flexible low MOQs."
       />
 
-      {/* ── BREADCRUMB STRIP ── */}
-      <div className="w-full bg-white border-b border-border py-3">
-        <div className="max-w-[1170px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-xs text-text-light">
-            <Link to="/" className="hover:text-primary transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-primary font-semibold">B2B Wholesale & Gym Supply</span>
-          </div>
-        </div>
-      </div>
+
 
       {/* ── 1. MAIN ENTERPRISE SHOWCASE SECTION ── */}
       <section className="w-full py-8 sm:py-12 md:py-16 bg-white border-b border-border">
@@ -539,38 +544,23 @@ export default function WholesaleB2B() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-text mb-1.5">
-                      Business Type
-                    </label>
-                    <select
+                    <CustomSelect
+                      label="Business Type"
                       name="businessType"
                       value={formData.businessType}
                       onChange={handleInputChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-border text-xs sm:text-sm text-text focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all shadow-2xs"
-                    >
-                      <option value="Gym / Fitness Studio">Gym / Fitness Studio</option>
-                      <option value="Nutrition & Supplement Store">Nutrition & Supplement Store</option>
-                      <option value="CrossFit Box / MMA Academy">CrossFit Box / MMA Academy</option>
-                      <option value="Personal Trainer / Fitness Coach">Personal Trainer / Fitness Coach</option>
-                      <option value="Regional Distributor / Wholesaler">Regional Distributor / Wholesaler</option>
-                    </select>
+                      options={BUSINESS_TYPE_OPTIONS}
+                    />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-text mb-1.5">
-                      Estimated Monthly Volume
-                    </label>
-                    <select
+                    <CustomSelect
+                      label="Estimated Monthly Volume"
                       name="estimatedVolume"
                       value={formData.estimatedVolume}
                       onChange={handleInputChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-border text-xs sm:text-sm text-text focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all shadow-2xs"
-                    >
-                      <option value="₹25,000 - ₹50,000">₹25,000 - ₹50,000 (Starter)</option>
-                      <option value="₹50,000 - ₹1,50,000">₹50,000 - ₹1,50,000 (Pro Gym)</option>
-                      <option value="₹1,50,000 - ₹5,00,000">₹1,50,000 - ₹5,00,000 (Multi-Branch)</option>
-                      <option value="₹5,00,000+">₹5,00,000+ (Master Distributor)</option>
-                    </select>
+                      options={ESTIMATED_VOLUME_OPTIONS}
+                    />
                   </div>
                 </div>
 

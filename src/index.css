@@ -126,30 +126,52 @@ input[type="radio"] {
      OFFER WIDGET TAB BUTTONS
      ========================================= */
   .offer-tab {
-    border-radius: 4px;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    font-weight: 600;
-    color: #20262e;
-    border: 1px solid #20262e;
-    background: #fff;
-    padding: 8px 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.15rem;
+    font-weight: 700;
+    color: #374151;
+    border: 1.5px solid #e5e7eb;
+    background: #ffffff;
+    padding: 9px 12px;
     cursor: pointer;
     white-space: nowrap;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  }
+
+  @media (min-width: 640px) {
+    .offer-tab {
+      font-size: 0.875rem;
+      padding: 10px 18px;
+    }
   }
 
   .offer-tab:hover {
-    background: #f4f4f4;
+    background: #f9fafb;
+    border-color: #9ca3af;
+    color: #111827;
+  }
+
+  .offer-tab:active {
+    transform: scale(0.98);
   }
 
   .offer-tab-active {
-    background-color: #20262e;
-    color: #fff;
+    background: #1c120e;
+    color: #ffffff;
+    border-color: #1c120e;
+    box-shadow: 0 4px 12px rgba(28, 18, 14, 0.18);
   }
 
   .offer-tab-active:hover {
-    background-color: #20262e;
+    background: #2a1b15;
+    border-color: #2a1b15;
+    color: #ffffff;
   }
 
   /* =========================================

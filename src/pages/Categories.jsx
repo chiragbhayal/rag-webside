@@ -87,9 +87,9 @@ function CategoryCard({ category }) {
     <CategoryRangeCard
       to={category.url || `/gomzi-supplement/${category.slug}`}
       title={category.title}
-      subtitle={category.subtitle}
+      subtitle={category.subtitle || category.spec || ""}
       image={resolveImageUrl(category.image)}
-      badge={category.tag || "Premium"}
+      badge={category.tag || "PREMIUM"}
       count={category.productCount || 0}
     />
   );
@@ -110,12 +110,12 @@ export default function CategoriesSection() {
   });
   const [totalProducts, setTotalProducts] = useState(() => {
     const cached = getLocalCache(CATEGORIES_PAGE_CACHE_KEY);
-    return cached?.totalProducts || 153;
+    return cached?.totalProducts || 0;
   });
   const [activeFaq, setActiveFaq] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Fetch dynamic categories from the API on mount (SWR revalidation)
+  // Fetch dynamic categories directly from the backend API managed by admin
   useEffect(() => {
     let isMounted = true;
     const fetchCategories = async () => {
@@ -126,12 +126,21 @@ export default function CategoriesSection() {
         const res = await getCategoriesApi();
         if (isMounted && res.data?.data) {
           const data = res.data.data;
-          if (Array.isArray(data.categories) && data.categories.length > 0) {
-            setCategories(data.categories);
-            if (data.totalProducts) setTotalProducts(data.totalProducts);
+          if (Array.isArray(data.categories)) {
+            // Sort by admin display order
+            const activeCats = data.categories
+              .filter((c) => c && c.status !== false)
+              .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+            setCategories(activeCats);
+            const liveTotal =
+              data.totalProducts ||
+              activeCats.reduce((sum, c) => sum + (c.productCount || 0), 0);
+            setTotalProducts(liveTotal);
+
             setLocalCache(CATEGORIES_PAGE_CACHE_KEY, {
-              categories: data.categories,
-              totalProducts: data.totalProducts || 153,
+              categories: activeCats,
+              totalProducts: liveTotal,
             });
           }
         }
@@ -149,13 +158,31 @@ export default function CategoriesSection() {
   }, []);
 
   const filteredCategories = useMemo(() => {
-    if (!searchQuery.trim()) return categories;
+    // Only show active categories
+    const activeOnly = categories.filter((c) => c && c.status !== false);
+
+    // Deduplicate by slug or title to ensure clean display
+    const seen = new Set();
+    const unique = [];
+    for (const cat of activeOnly) {
+      const key = (cat.slug || cat.title || "").toLowerCase().trim();
+      if (key && !seen.has(key)) {
+        seen.add(key);
+        unique.push(cat);
+      }
+    }
+
+    // Preserve admin ordering
+    unique.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+    if (!searchQuery.trim()) return unique;
     const q = searchQuery.toLowerCase().trim();
-    return categories.filter(
+    return unique.filter(
       (cat) =>
         cat.title?.toLowerCase().includes(q) ||
         cat.subtitle?.toLowerCase().includes(q) ||
-        cat.tag?.toLowerCase().includes(q)
+        cat.tag?.toLowerCase().includes(q) ||
+        cat.spec?.toLowerCase().includes(q)
     );
   }, [categories, searchQuery]);
 

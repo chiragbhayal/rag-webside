@@ -167,7 +167,10 @@ const ProductsGrid = ({ categorySlug, pageData }) => {
   | Product API Query
   |--------------------------------------------------------------------------
   */
-  const activeCategory = category || pageData?.category || "";
+  const activeCategory =
+    category ||
+    pageData?.category ||
+    (categorySlug ? categorySlug.replace(/-/g, " ") : "");
   const activeBrand = selectedCompany !== "All Companies" ? selectedCompany : "";
 
   // Special nav modes (Best Sellers & Offer Zone) should not be sent as literal text searches to MongoDB
@@ -285,6 +288,8 @@ const ProductsGrid = ({ categorySlug, pageData }) => {
       setSelectedCategory(category);
     } else if (pageData?.category) {
       setSelectedCategory(pageData.category);
+    } else if (categorySlug) {
+      setSelectedCategory(categorySlug.replace(/-/g, " "));
     } else {
       setSelectedCategory("All Products");
     }
@@ -296,7 +301,7 @@ const ProductsGrid = ({ categorySlug, pageData }) => {
     }
 
     setCurrentPage(1);
-  }, [category, pageData?.category, brandParam]);
+  }, [category, pageData?.category, categorySlug, brandParam]);
 
   const handleCategorySelect = (categoryName) => {
     setCurrentPage(1);
@@ -900,7 +905,7 @@ const ProductsGrid = ({ categorySlug, pageData }) => {
             </div>
 
             {/* 2. Companies & Brands Card */}
-            <div className="bg-white rounded-3xl border border-gray-200/90 p-5 shadow-xs sticky top-24">
+            <div className="bg-white rounded-3xl border border-gray-200/90 p-5 shadow-xs">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="font-extrabold text-base text-black tracking-tight flex items-center gap-2">
                   <Building2 className="w-4 h-4 text-primary" />
@@ -934,10 +939,7 @@ const ProductsGrid = ({ categorySlug, pageData }) => {
               <div className="border-b border-gray-100 mb-3" />
 
               {/* Companies List */}
-              <div
-                className="flex flex-col space-y-1 max-h-[340px] overflow-y-auto pr-1 scrollbar-hide [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              >
+              <div className="flex flex-col space-y-1">
                 {filteredCompanies.map((item) => {
                   const isSelected = selectedCompany === item.name;
 
