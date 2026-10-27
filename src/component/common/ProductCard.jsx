@@ -6,7 +6,7 @@ import {
   getFallbackProductImage,
 } from "../../utils/productAdapter";
 import { addProductToCart } from "../../services/cartStorage.service";
-import { successToast } from "../../utils/toast";
+import { successToast, errorToast } from "../../utils/toast";
 import useAuth from "../../hooks/useAuth";
 
 /**
@@ -78,6 +78,16 @@ export default function ProductCard({
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
+    const isUserLoggedIn =
+      isAuthenticated || Boolean(localStorage.getItem("authorization"));
+    if (!isUserLoggedIn) {
+      navigate(
+        `/login?redirect=${encodeURIComponent(
+          location.pathname + location.search
+        )}`
+      );
+      return;
+    }
     setBusy(true);
     try {
       if (onAddToCart) {
@@ -95,6 +105,16 @@ export default function ProductCard({
 
   const handleBuyNow = async (e) => {
     e.stopPropagation();
+    const isUserLoggedIn =
+      isAuthenticated || Boolean(localStorage.getItem("authorization"));
+    if (!isUserLoggedIn) {
+      navigate(
+        `/login?redirect=${encodeURIComponent(url)}&from=${encodeURIComponent(
+          location.pathname + location.search
+        )}`
+      );
+      return;
+    }
     setBusy(true);
     try {
       if (onAddToCart) {
@@ -102,18 +122,7 @@ export default function ProductCard({
       } else {
         await addProductToCart(product);
       }
-
-      // Buy Now opens the product's own page. If the visitor is not signed in
-      // yet, send them through login first and land back on that page.
-      if (isAuthenticated) {
-        navigate(url);
-      } else {
-        navigate(
-          `/login?redirect=${encodeURIComponent(url)}&from=${encodeURIComponent(
-            location.pathname + location.search
-          )}`
-        );
-      }
+      navigate(url);
     } finally {
       setBusy(false);
     }
@@ -178,16 +187,22 @@ export default function ProductCard({
 
         {/* Product Image */}
         <div className="mx-auto my-2 flex h-36 sm:h-44 w-full items-center justify-center p-2 bg-white">
-          <img
-            src={getProductImageUrl(product)}
-            alt={product.name}
-            loading="lazy"
-            className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = getFallbackProductImage(product);
-            }}
-          />
+          {getProductImageUrl(product) ? (
+            <img
+              src={getProductImageUrl(product)}
+              alt={product.name}
+              loading="lazy"
+              className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.style.display = "none";
+              }}
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center rounded-lg bg-gray-50 p-2 text-center text-xs font-medium text-gray-400">
+              {product.name}
+            </div>
+          )}
         </div>
 
         {/* Rating + Veg Symbol */}
