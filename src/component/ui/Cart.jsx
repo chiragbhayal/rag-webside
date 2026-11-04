@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { getProductImageUrl } from "../../data/homeProducts";
-import PageLoading from "../PageLoading";
+import { CartSkeleton } from "../common/LoadingSkeletons";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 import LoginModal from "../auth/LoginModal";
 import useAuth from "../../hooks/useAuth";
+import CartGymAccessOffer from "../common/GymAccessOffer";
 
 const ProductImg = ({ src, alt, bg, label, className }) => {
   const [err, setErr] = useState(false);
@@ -44,14 +45,14 @@ export default function Cart() {
 
   const handleCheckout = () => {
     if (!isAuthenticated) {
-      setShowLogin(true);
+      navigate("/login?redirect=/checkouts");
       return;
     }
 
     navigate("/checkouts");
   };
   const saving = originalTotal - subtotal;
-  if (loading) return <PageLoading />;
+  if (loading) return <CartSkeleton />;
   if (error) return <section role="alert" className="max-w-xl mx-auto px-5 py-24 text-center"><h1 className="text-3xl font-bold mb-4">We couldn't load your cart</h1><p className="text-stone-500 mb-6">Your saved items are safe. Please try again.</p><button onClick={() => fetchCart()} className="rounded-xl bg-primary text-white px-6 py-3">Try again</button></section>;
   if (!items || items.length === 0) {
     return (
@@ -274,6 +275,8 @@ export default function Cart() {
                   </span>
                 </div>
               </div>
+
+              <CartGymAccessOffer />
 
               <div className="flex items-center gap-2 mb-5">
                 <Stars filled={5} />

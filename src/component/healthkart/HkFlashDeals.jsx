@@ -10,7 +10,6 @@ import {
   ChevronRight,
   Star,
   ShoppingCart,
-  Zap,
   CheckCircle2,
 } from "lucide-react";
 import { fetchProducts } from "../../services/product.service";
@@ -21,12 +20,14 @@ import {
   getProductBrand,
 } from "../../data/homeProducts";
 import HkProductCardActions from "./HkProductCardActions";
+import { ProductGridSkeleton } from "../common/LoadingSkeletons";
 
 export default function HkFlashDeals() {
   const navigate = useNavigate();
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [deals, setDeals] = useState(FLASH_DEAL_PRODUCTS);
+  const [loading, setLoading] = useState(true);
 
   // Fetch live deals from backend with multi-brand diversification
   useEffect(() => {
@@ -44,6 +45,8 @@ export default function HkFlashDeals() {
         }
       } catch (err) {
         console.error("Error loading flash deals:", err);
+      } finally {
+        if (isMounted) setLoading(false);
       }
     };
     loadDeals();
@@ -59,9 +62,6 @@ export default function HkFlashDeals() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-border gap-3">
           <div className="flex items-center gap-3 flex-wrap">
             <div className="flex items-center gap-2">
-              <span className="p-1.5 rounded-lg bg-primary text-white">
-                <Zap size={18} className="fill-current" />
-              </span>
               <h2 className="text-xl sm:text-2xl font-black text-text tracking-tight font-toma">
                 Flash Deals &amp; Just Launched
               </h2>
@@ -103,7 +103,7 @@ export default function HkFlashDeals() {
 
         {/* Products Swiper Slider (HealthKart card layout: 4 cards on desktop) */}
         <div className="mt-6 relative w-full">
-          <Swiper
+          {loading ? <ProductGridSkeleton label="Loading products" /> : <Swiper
             key={`deals-swiper-${deals.length}`}
             modules={[Navigation]}
             slidesPerView={4}
@@ -229,7 +229,7 @@ export default function HkFlashDeals() {
                 </SwiperSlide>
               );
             })}
-          </Swiper>
+          </Swiper>}
         </div>
       </div>
     </section>

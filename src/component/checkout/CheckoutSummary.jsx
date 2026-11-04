@@ -5,6 +5,9 @@ import useCart from "../../hooks/useCart";
 import { useState, useEffect } from "react";
 import { checkCouponCode } from "../../api/product.api";
 import useBranding from "../../content/useBranding";
+import { getCartPricingLines } from "../../services/cartPricing.service";
+
+import CartGymAccessOffer from "../common/GymAccessOffer";
 
 function CartItem({ item }) {
   return (
@@ -80,6 +83,9 @@ export default function CheckoutSummary({ coupon, setCoupon }) {
 
       const data = await checkCouponCode({
         coupon_code: discountCode.trim(),
+        products: getCartPricingLines(items).map((i) => ({
+          product_id: i.product_id,
+        })),
       });
       const couponData = data.data.data;
 
@@ -101,10 +107,28 @@ export default function CheckoutSummary({ coupon, setCoupon }) {
   let couponDiscount = 0;
 
   if (coupon) {
+    const isScoped =
+      coupon.scope === "SPECIFIC_PRODUCTS" &&
+      Array.isArray(coupon.applicable_products) &&
+      coupon.applicable_products.length > 0;
+
+    const applicableSet = isScoped
+      ? new Set(coupon.applicable_products.map((id) => String(id)))
+      : null;
+
+    // Line-item eligible base sum
+    const eligibleTotal = getCartPricingLines(items).reduce((sum, item) => {
+      const pId = String(item.product_id);
+      if (!isScoped || applicableSet.has(pId)) {
+        return sum + item.unit_price * item.quantity;
+      }
+      return sum;
+    }, 0);
+
     if (coupon.discount_type === "percent") {
-      couponDiscount = (total * coupon.discount) / 100;
-    } else if (coupon.discount_type === "fixed") {
-      couponDiscount = coupon.discount;
+      couponDiscount = (eligibleTotal * Number(coupon.discount || 0)) / 100;
+    } else if (coupon.discount_type === "fixed" || coupon.discount_type === "rupees") {
+      couponDiscount = Math.min(Number(coupon.discount || 0), eligibleTotal);
     }
 
     couponDiscount = Math.min(couponDiscount, total);
@@ -130,6 +154,8 @@ export default function CheckoutSummary({ coupon, setCoupon }) {
           <CartItem key={`${item._id || item.item_id}-${item.variation_id || "base"}`} item={item} />
         ))}
       </div>
+
+      <CartGymAccessOffer />
 
       <form className="flex flex-col sm:flex-row gap-3 mt-6" onSubmit={(event) => { event.preventDefault(); handleApplyCoupon(); }}>
         <input

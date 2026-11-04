@@ -11,7 +11,6 @@ import {
   X,
   ChevronDown,
   Sparkles,
-  Flame,
   PhoneCall,
   FileCheck,
   ShieldCheck,
@@ -25,6 +24,7 @@ import {
   Scale,
   HeartPulse,
   Utensils,
+  Home,
 } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import useCart from "../../hooks/useCart";
@@ -229,6 +229,12 @@ export default function HkHeader() {
   const contact = useContactDetails();
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
+  const userDisplayName =
+    user?.displayName ||
+    user?.first_name ||
+    (user?.name ? user.name.split(" ")[0] : null) ||
+    (user?.email ? user.email.split("@")[0] : null) ||
+    "Account";
   const { items: authCartItems } = useCart();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -392,17 +398,15 @@ export default function HkHeader() {
         <div className="order-3 md:order-none w-full md:w-auto md:flex-1 max-w-2xl md:mx-2 relative" ref={searchContainerRef}>
           <form onSubmit={handleSearchSubmit} className="relative w-full">
             <div
-              className={`flex items-center bg-light border rounded-xl h-11 px-3.5 transition-all shadow-inner ${
-                isSearchFocused
-                  ? "border-primary bg-white ring-2 ring-primary/20 shadow-md"
-                  : "border-border hover:border-primary/60"
-              }`}
+              className={`flex items-center bg-light border rounded-xl h-11 px-3.5 transition-all shadow-inner ${isSearchFocused
+                ? "border-primary bg-white ring-2 ring-primary/20 shadow-md"
+                : "border-border hover:border-primary/60"
+                }`}
             >
               <Search
                 size={18}
-                className={`mr-2.5 flex-shrink-0 transition-colors ${
-                  isSearchFocused ? "text-primary" : "text-stone-400"
-                }`}
+                className={`mr-2.5 flex-shrink-0 transition-colors ${isSearchFocused ? "text-primary" : "text-stone-400"
+                  }`}
               />
               <input
                 type="search"
@@ -648,7 +652,7 @@ export default function HkHeader() {
           >
             <User size={16} />
             <span className="hidden sm:inline">
-              {isAuthenticated ? user?.name?.split(" ")[0] || "Account" : "Login"}
+              {isAuthenticated ? userDisplayName : "Login"}
             </span>
           </button>
 
@@ -786,11 +790,10 @@ export default function HkHeader() {
                           navigate(`/gomzi-supplement/${cat.slug}`);
                           setIsCategoryMenuOpen(false);
                         }}
-                        className={`w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
-                          isActive
-                            ? "bg-white text-primary shadow-sm font-bold border border-border"
-                            : "text-stone-700 hover:bg-white/60"
-                        }`}
+                        className={`w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${isActive
+                          ? "bg-white text-primary shadow-sm font-bold border border-border"
+                          : "text-stone-700 hover:bg-white/60"
+                          }`}
                       >
                         <span className="flex items-center gap-2">
                           <IconComp
@@ -869,14 +872,28 @@ export default function HkHeader() {
           </div>
 
           <nav aria-label="Shop navigation" className="hidden lg:flex items-center gap-4 xl:gap-6 py-2 whitespace-nowrap">
+            <NavLink
+              to="/"
+              end
+              onClick={() => setIsCategoryMenuOpen(false)}
+              className={({ isActive }) =>
+                `inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 font-bold transition-all shadow-sm ${isActive
+                  ? "bg-primary text-white border-primary"
+                  : "bg-white hover:bg-[#fbf4f0] text-stone-700 hover:text-primary"
+                }`
+              }
+            >
+              <Home size={14} />
+              <span>Home</span>
+            </NavLink>
             <Link to="/gomzi-supplement?sort=bestseller" onClick={() => setIsCategoryMenuOpen(false)} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#fcf2ee] hover:bg-[#f6e4dc] px-3 py-1.5 text-primary font-bold transition-colors">
-              <Flame size={13} className="fill-current" /> Best Sellers
+              Shop Now
             </Link>
             {PRIMARY_LINKS.filter(link => !["/", "/gomzi-supplement", "/category"].includes(link.to)).map(link => (
               <NavigationLink key={link.to} link={link} onClick={() => setIsCategoryMenuOpen(false)} />
             ))}
-            <a href="/pdf/product-report.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-emerald-800 hover:text-emerald-950 font-bold transition-colors">
-              <FileCheck size={13} /> NABL Reports
+            <a href="/pdf/product-report.pdf" target="_blank" rel="noreferrer" className="text-sm font-bold text-emerald-700 hover:text-emerald-900 transition-colors">
+              Batch Lab Reports
             </a>
           </nav>
           <div className="hidden md:flex lg:hidden xl:flex items-center gap-2 whitespace-nowrap">
@@ -989,7 +1006,7 @@ export default function HkHeader() {
                 }}
                 className="w-full py-2.5 bg-primary text-white text-xs font-bold rounded-lg uppercase tracking-wider cursor-pointer"
               >
-                {isAuthenticated ? "My Account" : "Login / Register"}
+                {isAuthenticated ? (userDisplayName !== "Account" ? `Hi, ${userDisplayName}` : "My Account") : "Login / Register"}
               </button>
             </div>
           </div>

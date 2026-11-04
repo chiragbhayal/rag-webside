@@ -134,6 +134,62 @@
       "type": "text",
       "default": "BUYING GUIDE"
     },
+    "component.category.BrandFilter.section.1e5ee5e58c8f": {
+      "source": "src/component/category/BrandFilter.jsx",
+      "group": "Shop / Brand Filter",
+      "label": "Show section: Brands",
+      "type": "toggle",
+      "default": true
+    },
+    "component.category.BrandFilter.attribute-aria-label.820025de77e6": {
+      "source": "src/component/category/BrandFilter.jsx",
+      "group": "Shop / Brand Filter",
+      "label": "aria label: Brand filters",
+      "type": "text",
+      "default": "Brand filters"
+    },
+    "component.category.BrandFilter.text.ec26be2ce7a0": {
+      "source": "src/component/category/BrandFilter.jsx",
+      "group": "Shop / Brand Filter",
+      "label": "Brands",
+      "type": "text",
+      "default": "Brands"
+    },
+    "component.category.BrandFilter.text.daee7606b339": {
+      "source": "src/component/category/BrandFilter.jsx",
+      "group": "Shop / Brand Filter",
+      "label": "Reset",
+      "type": "text",
+      "default": "Reset"
+    },
+    "component.category.BrandFilter.text.db6c1f2ff7ef": {
+      "source": "src/component/category/BrandFilter.jsx",
+      "group": "Shop / Brand Filter",
+      "label": "Loading brands…",
+      "type": "text",
+      "default": "Loading brands…"
+    },
+    "component.category.BrandFilter.text.942087cc2d41": {
+      "source": "src/component/category/BrandFilter.jsx",
+      "group": "Shop / Brand Filter",
+      "label": "Retry",
+      "type": "text",
+      "default": "Retry"
+    },
+    "component.category.BrandFilter.attribute-aria-label.575eae1c6db7": {
+      "source": "src/component/category/BrandFilter.jsx",
+      "group": "Shop / Brand Filter",
+      "label": "aria label: Product brands",
+      "type": "text",
+      "default": "Product brands"
+    },
+    "component.category.BrandFilter.text.bda050585a00": {
+      "source": "src/component/category/BrandFilter.jsx",
+      "group": "Shop / Brand Filter",
+      "label": "—",
+      "type": "text",
+      "default": "—"
+    },
     "component.category.CategoryHero.text.1687175b7471": {
       "source": "src/component/category/CategoryHero.jsx",
       "group": "Shop / Category Hero",
@@ -246,6 +302,68 @@
       "type": "text",
       "default": "Everything you should know before choosing your supplement."
     },
+    "component.category.MobileCatalogFilters.attribute-aria-label.7aabe4557833": {
+      "source": "src/component/category/MobileCatalogFilters.jsx",
+      "group": "Shop / Mobile Catalog Filters",
+      "label": "aria label: Catalog filters and sorting",
+      "type": "text",
+      "default": "Catalog filters and sorting"
+    },
+    "component.category.MobileCatalogFilters.text.f5a1a760a9b5": {
+      "source": "src/component/category/MobileCatalogFilters.jsx",
+      "group": "Shop / Mobile Catalog Filters",
+      "label": "Filter products",
+      "type": "text",
+      "default": "Filter products"
+    },
+    "component.category.MobileCatalogFilters.attribute-aria-label.cb3d62c45e59": {
+      "source": "src/component/category/MobileCatalogFilters.jsx",
+      "group": "Shop / Mobile Catalog Filters",
+      "label": "aria label: Close product filters",
+      "type": "text",
+      "default": "Close product filters"
+    },
+    "component.category.MobileCatalogFilters.items.bc7396ee8917": {
+      "source": "src/component/category/MobileCatalogFilters.jsx",
+      "group": "Shop / Mobile Catalog Filters",
+      "label": "Repeated items",
+      "type": "collection",
+      "default": [
+        [
+          "category",
+          "Categories"
+        ],
+        [
+          "brand",
+          "Brands"
+        ],
+        [
+          "sort",
+          "Sort"
+        ]
+      ]
+    },
+    "component.category.MobileCatalogFilters.attribute-aria-label.b5c3b33da383": {
+      "source": "src/component/category/MobileCatalogFilters.jsx",
+      "group": "Shop / Mobile Catalog Filters",
+      "label": "aria label: Product categories",
+      "type": "text",
+      "default": "Product categories"
+    },
+    "component.category.MobileCatalogFilters.attribute-aria-label.80b5df0f1309": {
+      "source": "src/component/category/MobileCatalogFilters.jsx",
+      "group": "Shop / Mobile Catalog Filters",
+      "label": "aria label: Sort options",
+      "type": "text",
+      "default": "Sort options"
+    },
+    "component.category.MobileCatalogFilters.text.4f0a6d5d68c4": {
+      "source": "src/component/category/MobileCatalogFilters.jsx",
+      "group": "Shop / Mobile Catalog Filters",
+      "label": "&check;",
+      "type": "text",
+      "default": "&check;"
+    },
     "component.category.ShopCategorySections.section.2618182c3894": {
       "source": "src/component/category/ShopCategorySections.jsx",
       "group": "Shop / Shop Category Sections",
@@ -344,7 +462,7 @@
       "type": "text",
       "default": "Jump to a product category"
     },
-    "component.checkout.CheckoutForm.section.a8fd7dc0e1bf": {
+    "component.checkout.CheckoutForm.section.6903260f1db7": {
       "source": "src/component/checkout/CheckoutForm.jsx",
       "group": "Checkout / Checkout Form",
       "label": "Show section: Contact",
@@ -365,7 +483,7 @@
       "type": "text",
       "default": "Email"
     },
-    "component.checkout.CheckoutForm.section.3c98b2624d1e": {
+    "component.checkout.CheckoutForm.section.803919e93cca": {
       "source": "src/component/checkout/CheckoutForm.jsx",
       "group": "Checkout / Checkout Form",
       "label": "Show section: Delivery",
@@ -449,14 +567,7 @@
       "type": "text",
       "default": "Phone"
     },
-    "component.checkout.CheckoutForm.attribute-label.90bbff0bf575": {
-      "source": "src/component/checkout/CheckoutForm.jsx",
-      "group": "Checkout / Checkout Form",
-      "label": "label: Save this information for next time",
-      "type": "text",
-      "default": "Save this information for next time"
-    },
-    "component.checkout.CheckoutForm.section.52a5b8e806e0": {
+    "component.checkout.CheckoutForm.section.19febac2c341": {
       "source": "src/component/checkout/CheckoutForm.jsx",
       "group": "Checkout / Checkout Form",
       "label": "Show section: Payment",
@@ -511,6 +622,41 @@
       "label": "Pay in cash when your order is delivered to your door. No advance payment required.",
       "type": "text",
       "default": "Pay in cash when your order is delivered to your door. No advance payment required."
+    },
+    "component.checkout.CheckoutForm.text.9be1b0537945": {
+      "source": "src/component/checkout/CheckoutForm.jsx",
+      "group": "Checkout / Checkout Form",
+      "label": "Your payment needs confirmation. Check its status before paying again.",
+      "type": "text",
+      "default": "Your payment needs confirmation. Check its status before paying again."
+    },
+    "component.checkout.CheckoutForm.text.0285d6370b18": {
+      "source": "src/component/checkout/CheckoutForm.jsx",
+      "group": "Checkout / Checkout Form",
+      "label": "Confirming payment...",
+      "type": "text",
+      "default": "Confirming payment..."
+    },
+    "component.checkout.CheckoutForm.text.b7d849d6c926": {
+      "source": "src/component/checkout/CheckoutForm.jsx",
+      "group": "Checkout / Checkout Form",
+      "label": "Retry confirmation",
+      "type": "text",
+      "default": "Retry confirmation"
+    },
+    "component.checkout.CheckoutForm.attribute-to.55d685028857": {
+      "source": "src/component/checkout/CheckoutForm.jsx",
+      "group": "Checkout / Checkout Form",
+      "label": "to: /profile",
+      "type": "link",
+      "default": "/profile"
+    },
+    "component.checkout.CheckoutForm.text.00db793f2b8c": {
+      "source": "src/component/checkout/CheckoutForm.jsx",
+      "group": "Checkout / Checkout Form",
+      "label": "My Orders",
+      "type": "text",
+      "default": "My Orders"
     },
     "component.checkout.CheckoutForm.text.f40a853e58a1": {
       "source": "src/component/checkout/CheckoutForm.jsx",
@@ -865,6 +1011,83 @@
       "type": "toggle",
       "default": true
     },
+    "component.common.GymAccessOffer.text.8b66b370b0f1": {
+      "source": "src/component/common/GymAccessOffer.jsx",
+      "group": "Website sections / Gym Access Offer",
+      "label": "Checking free gym access…",
+      "type": "text",
+      "default": "Checking free gym access…"
+    },
+    "component.common.GymAccessOffer.text.d8b8392e2c54": {
+      "source": "src/component/common/GymAccessOffer.jsx",
+      "group": "Website sections / Gym Access Offer",
+      "label": "Try again",
+      "type": "text",
+      "default": "Try again"
+    },
+    "component.common.GymAccessOffer.text.5fd79c43d812": {
+      "source": "src/component/common/GymAccessOffer.jsx",
+      "group": "Website sections / Gym Access Offer",
+      "label": "gym access",
+      "type": "text",
+      "default": " gym access"
+    },
+    "component.common.GymAccessOffer.text.3be9efc271b0": {
+      "source": "src/component/common/GymAccessOffer.jsx",
+      "group": "Website sections / Gym Access Offer",
+      "label": "FREE · ₹0",
+      "type": "text",
+      "default": "FREE · ₹0"
+    },
+    "component.common.GymAccessOffer.text.ed7b7911b185": {
+      "source": "src/component/common/GymAccessOffer.jsx",
+      "group": "Website sections / Gym Access Offer",
+      "label": "Gomzi product subtotal:",
+      "type": "text",
+      "default": "Gomzi product subtotal: "
+    },
+    "component.common.GymAccessOffer.text.0348330747c0": {
+      "source": "src/component/common/GymAccessOffer.jsx",
+      "group": "Website sections / Gym Access Offer",
+      "label": ". Calculated before coupon discounts and delivery.",
+      "type": "text",
+      "default": ". Calculated before coupon discounts and delivery."
+    },
+    "component.common.GymAccessOffer.text.8d89e4a829ae": {
+      "source": "src/component/common/GymAccessOffer.jsx",
+      "group": "Website sections / Gym Access Offer",
+      "label": "Add",
+      "type": "text",
+      "default": "Add "
+    },
+    "component.common.GymAccessOffer.text.1a10a7734da2": {
+      "source": "src/component/common/GymAccessOffer.jsx",
+      "group": "Website sections / Gym Access Offer",
+      "label": "more in Gomzi products to upgrade to",
+      "type": "text",
+      "default": " more in Gomzi products to upgrade to "
+    },
+    "component.common.LoadingSkeletons.attribute-label.764a08852223": {
+      "source": "src/component/common/LoadingSkeletons.jsx",
+      "group": "Website sections / Loading Skeletons",
+      "label": "label: Loading your cart",
+      "type": "text",
+      "default": "Loading your cart"
+    },
+    "component.common.LoadingSkeletons.attribute-label.5f1e4b4f1734": {
+      "source": "src/component/common/LoadingSkeletons.jsx",
+      "group": "Website sections / Loading Skeletons",
+      "label": "label: Loading checkout",
+      "type": "text",
+      "default": "Loading checkout"
+    },
+    "component.common.LoadingSkeletons.attribute-label.bef53fcbe1b4": {
+      "source": "src/component/common/LoadingSkeletons.jsx",
+      "group": "Website sections / Loading Skeletons",
+      "label": "label: Loading your orders",
+      "type": "text",
+      "default": "Loading your orders"
+    },
     "component.common.ProductCard.text.d892cb05720e": {
       "source": "src/component/common/ProductCard.jsx",
       "group": "Website sections / Product Card",
@@ -879,12 +1102,12 @@
       "type": "text",
       "default": "New"
     },
-    "component.common.ProductCard.text.8b670b7eead7": {
+    "component.common.ProductCard.text.f29c7621dd9f": {
       "source": "src/component/common/ProductCard.jsx",
       "group": "Website sections / Product Card",
-      "label": "No reviews yet",
+      "label": "No reviews",
       "type": "text",
-      "default": "No reviews yet"
+      "default": "No reviews"
     },
     "component.common.ProductCard.text.2eaea5c71eb8": {
       "source": "src/component/common/ProductCard.jsx",
@@ -899,6 +1122,27 @@
       "label": "Guaranteed Best Price",
       "type": "text",
       "default": "Guaranteed Best Price"
+    },
+    "component.common.SkeletonLoaders.section.350326701b83": {
+      "source": "src/component/common/SkeletonLoaders.jsx",
+      "group": "Website sections / Skeleton Loaders",
+      "label": "Show section: Content section",
+      "type": "toggle",
+      "default": true
+    },
+    "component.common.SkeletonLoaders.section.b0cc10087a35": {
+      "source": "src/component/common/SkeletonLoaders.jsx",
+      "group": "Website sections / Skeleton Loaders",
+      "label": "Show section: Content section",
+      "type": "toggle",
+      "default": true
+    },
+    "component.common.SkeletonLoaders.section.736cf841efdf": {
+      "source": "src/component/common/SkeletonLoaders.jsx",
+      "group": "Website sections / Skeleton Loaders",
+      "label": "Show section: Content section",
+      "type": "toggle",
+      "default": true
     },
     "component.healthkart.HkBannerAds.attribute-aria-label.7d649bd18fbc": {
       "source": "src/component/healthkart/HkBannerAds.jsx",
@@ -936,7 +1180,7 @@
       "default": [
         {
           "id": "all",
-          "label": "🔥 All Products",
+          "label": "All Products",
           "category": ""
         },
         {
@@ -976,7 +1220,7 @@
         }
       ]
     },
-    "component.healthkart.HkBestSellersTabbed.section.d047f40b7ef6": {
+    "component.healthkart.HkBestSellersTabbed.section.55c9af00a7e7": {
       "source": "src/component/healthkart/HkBestSellersTabbed.jsx",
       "group": "Home / Best Sellers Tabbed",
       "label": "Show section: Explore supplements by category",
@@ -1011,12 +1255,12 @@
       "type": "text",
       "default": "Products"
     },
-    "component.healthkart.HkBestSellersTabbed.text.297fe4b6889e": {
+    "component.healthkart.HkBestSellersTabbed.attribute-label.9f53b22675bc": {
       "source": "src/component/healthkart/HkBestSellersTabbed.jsx",
       "group": "Home / Best Sellers Tabbed",
-      "label": "Loading authentic supplements...",
+      "label": "label: Loading supplements",
       "type": "text",
-      "default": "Loading authentic supplements..."
+      "default": "Loading supplements"
     },
     "component.healthkart.HkBestSellersTabbed.text.d892cb05720e": {
       "source": "src/component/healthkart/HkBestSellersTabbed.jsx",
@@ -1032,26 +1276,40 @@
       "type": "text",
       "default": "Save ₹"
     },
-    "component.healthkart.HkCategoryCircles.section.56f2f6918fec": {
+    "component.healthkart.HkCategoryCircles.section.9cbfc3c153a2": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
       "group": "Home / Category Circles",
-      "label": "Show section: Popular Categories",
+      "label": "Show section: Explore By Fitness Goal",
       "type": "toggle",
       "default": true
     },
-    "component.healthkart.HkCategoryCircles.text.9942bf5b8445": {
+    "component.healthkart.HkCategoryCircles.text.3d2cf30b7a98": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
       "group": "Home / Category Circles",
-      "label": "Popular Categories",
+      "label": "Explore By Fitness Goal",
       "type": "text",
-      "default": "Popular Categories"
+      "default": "Explore By Fitness Goal"
     },
-    "component.healthkart.HkCategoryCircles.text.83320979f688": {
+    "component.healthkart.HkCategoryCircles.text.922bb4e5618a": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
       "group": "Home / Category Circles",
-      "label": "Explore supplements curated for your exact fitness and physique goals",
+      "label": "Popular",
       "type": "text",
-      "default": "Explore supplements curated for your exact fitness and physique goals"
+      "default": "Popular "
+    },
+    "component.healthkart.HkCategoryCircles.text.b8b1d894c683": {
+      "source": "src/component/healthkart/HkCategoryCircles.jsx",
+      "group": "Home / Category Circles",
+      "label": "Categories",
+      "type": "text",
+      "default": "Categories"
+    },
+    "component.healthkart.HkCategoryCircles.text.764938bb57ca": {
+      "source": "src/component/healthkart/HkCategoryCircles.jsx",
+      "group": "Home / Category Circles",
+      "label": "Scientifically engineered sports nutrition and wellness essentials built for your physique and ",
+      "type": "text",
+      "default": "Scientifically engineered sports nutrition and wellness essentials built for your physique and athletic goals."
     },
     "component.healthkart.HkCategoryCircles.attribute-to.11fa57f76c7b": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
@@ -1060,12 +1318,26 @@
       "type": "link",
       "default": "/category"
     },
-    "component.healthkart.HkCategoryCircles.text.25d605a3237d": {
+    "component.healthkart.HkCategoryCircles.text.a927af7dbd3d": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
       "group": "Home / Category Circles",
-      "label": "View All Categories",
+      "label": "View All (",
       "type": "text",
-      "default": "View All Categories"
+      "default": "View All ("
+    },
+    "component.healthkart.HkCategoryCircles.attribute-aria-label.863181688554": {
+      "source": "src/component/healthkart/HkCategoryCircles.jsx",
+      "group": "Home / Category Circles",
+      "label": "aria label: Previous categories",
+      "type": "text",
+      "default": "Previous categories"
+    },
+    "component.healthkart.HkCategoryCircles.attribute-aria-label.d1479f6bd0f8": {
+      "source": "src/component/healthkart/HkCategoryCircles.jsx",
+      "group": "Home / Category Circles",
+      "label": "aria label: Next categories",
+      "type": "text",
+      "default": "Next categories"
     },
     "component.healthkart.HkCategoryCircles.attribute-aria-label.d2e6d628f0af": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
@@ -1074,12 +1346,12 @@
       "type": "text",
       "default": "Loading popular categories"
     },
-    "component.healthkart.HkCategoryCircles.text.add8394ecee2": {
+    "component.healthkart.HkCategoryCircles.text.55856027618d": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
       "group": "Home / Category Circles",
-      "label": "We couldn't load the categories.",
+      "label": "We couldn't load the categories right now.",
       "type": "text",
-      "default": "We couldn't load the categories."
+      "default": "We couldn't load the categories right now."
     },
     "component.healthkart.HkCategoryCircles.text.d8b8392e2c54": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
@@ -1088,21 +1360,35 @@
       "type": "text",
       "default": "Try again"
     },
-    "component.healthkart.HkCategoryCircles.text.fb9ef894175c": {
+    "component.healthkart.HkCategoryCircles.text.e536e00e87b1": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
       "group": "Home / Category Circles",
-      "label": "Product",
+      "label": "GOMZI",
       "type": "text",
-      "default": "Product"
+      "default": "GOMZI"
     },
-    "component.healthkart.HkCategoryCircles.text.4edc8bfafc6b": {
+    "component.healthkart.HkCategoryCircles.text.4a33eacd5fa6": {
       "source": "src/component/healthkart/HkCategoryCircles.jsx",
       "group": "Home / Category Circles",
-      "label": "Products",
+      "label": "item",
       "type": "text",
-      "default": "Products"
+      "default": "item"
     },
-    "component.healthkart.HkCategoryShowcase.section.c5d4a63dbef4": {
+    "component.healthkart.HkCategoryCircles.text.5f3c4f8580d3": {
+      "source": "src/component/healthkart/HkCategoryCircles.jsx",
+      "group": "Home / Category Circles",
+      "label": "items",
+      "type": "text",
+      "default": "items"
+    },
+    "component.healthkart.HkCategoryCircles.text.dee9a2324123": {
+      "source": "src/component/healthkart/HkCategoryCircles.jsx",
+      "group": "Home / Category Circles",
+      "label": "Explore Range",
+      "type": "text",
+      "default": "Explore Range"
+    },
+    "component.healthkart.HkCategoryShowcase.section.aeec2fcd27fc": {
       "source": "src/component/healthkart/HkCategoryShowcase.jsx",
       "group": "Home / Category Showcase",
       "label": "Show section: Products",
@@ -1122,6 +1408,13 @@
       "label": "View All",
       "type": "text",
       "default": "View All "
+    },
+    "component.healthkart.HkCategoryShowcase.attribute-label.830bd5128d9e": {
+      "source": "src/component/healthkart/HkCategoryShowcase.jsx",
+      "group": "Home / Category Showcase",
+      "label": "label: Loading products",
+      "type": "text",
+      "default": "Loading products"
     },
     "component.healthkart.HkCategoryShowcase.text.d892cb05720e": {
       "source": "src/component/healthkart/HkCategoryShowcase.jsx",
@@ -1144,81 +1437,7 @@
       "type": "text",
       "default": "Save ₹"
     },
-    "component.healthkart.HkComboStackBuilder.data.STACKS": {
-      "source": "src/component/healthkart/HkComboStackBuilder.jsx",
-      "group": "Home / Combo Stack Builder",
-      "label": "STACKS",
-      "type": "collection",
-      "default": [
-        {
-          "id": "muscle",
-          "name": "Muscle & recovery",
-          "categories": [
-            "Whey Protein",
-            "Creatine Monohydrate",
-            "BCAA & Amino Acids"
-          ],
-          "labels": [
-            "Whey Protein",
-            "Creatine",
-            "BCAA & Intra"
-          ]
-        },
-        {
-          "id": "strength",
-          "name": "Workout essentials",
-          "categories": [
-            "Pre Workout",
-            "Creatine Monohydrate",
-            "BCAA & Amino Acids"
-          ],
-          "labels": [
-            "Pre Workout",
-            "Creatine",
-            "BCAA & Intra"
-          ]
-        },
-        {
-          "id": "shred",
-          "name": "Muscle & shred",
-          "categories": [
-            "Whey Protein",
-            "Wellness & Health",
-            "BCAA & Amino Acids"
-          ],
-          "labels": [
-            "Whey Protein",
-            "Fat Burner",
-            "BCAA & Intra"
-          ]
-        },
-        {
-          "id": "bulk",
-          "name": "Build your bulk",
-          "categories": [
-            "Whey Protein",
-            "Creatine Monohydrate"
-          ],
-          "labels": [
-            "Whey Protein",
-            "Creatine"
-          ]
-        },
-        {
-          "id": "endurance",
-          "name": "Fat burn & cardio",
-          "categories": [
-            "Wellness & Health",
-            "BCAA & Amino Acids"
-          ],
-          "labels": [
-            "Fat Burner",
-            "BCAA & Recovery"
-          ]
-        }
-      ]
-    },
-    "component.healthkart.HkComboStackBuilder.section.6cb88ea154fe": {
+    "component.healthkart.HkComboStackBuilder.section.00e6b8493611": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
       "label": "Show section: Better together",
@@ -1239,12 +1458,12 @@
       "type": "text",
       "default": "Your routine. Your stack."
     },
-    "component.healthkart.HkComboStackBuilder.text.631ccb1ca9d8": {
+    "component.healthkart.HkComboStackBuilder.text.2dcd07149ead": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "Pick the essentials that fit your training. Add them in one step.",
+      "label": "Handpicked product essentials at special bundle pricing. Add them in one step.",
       "type": "text",
-      "default": "Pick the essentials that fit your training. Add them in one step."
+      "default": "Handpicked product essentials at special bundle pricing. Add them in one step."
     },
     "component.healthkart.HkComboStackBuilder.attribute-aria-label.a7529e49b8cb": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
@@ -1253,19 +1472,19 @@
       "type": "text",
       "default": "Choose your stack"
     },
-    "component.healthkart.HkComboStackBuilder.text.5830b61f4938": {
+    "component.healthkart.HkComboStackBuilder.attribute-label.bd33fda89282": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "Finding your essentials…",
+      "label": "label: Loading combo essentials",
       "type": "text",
-      "default": "Finding your essentials…"
+      "default": "Loading combo essentials"
     },
-    "component.healthkart.HkComboStackBuilder.text.ddd6fa5583e1": {
+    "component.healthkart.HkComboStackBuilder.text.3404dddec3fc": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "We couldn't load a stack right now.",
+      "label": "We couldn't load this combo stack right now.",
       "type": "text",
-      "default": "We couldn't load a stack right now."
+      "default": "We couldn't load this combo stack right now."
     },
     "component.healthkart.HkComboStackBuilder.text.d8b8392e2c54": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
@@ -1281,33 +1500,47 @@
       "type": "text",
       "default": "0"
     },
-    "component.healthkart.HkComboStackBuilder.text.a2c55cbf91b6": {
+    "component.healthkart.HkComboStackBuilder.text.ce54f0e22dbb": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "Made for your routine",
+      "label": "Component",
       "type": "text",
-      "default": "Made for your routine"
+      "default": "Component"
     },
-    "component.healthkart.HkComboStackBuilder.text.a55751cecd11": {
+    "component.healthkart.HkComboStackBuilder.text.f9278035b36f": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "essential",
+      "label": "Combo Deal",
       "type": "text",
-      "default": "essential"
+      "default": " Combo Deal"
     },
-    "component.healthkart.HkComboStackBuilder.text.a153b9358c48": {
+    "component.healthkart.HkComboStackBuilder.text.d415a318107e": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "essentials",
+      "label": "Special Bundle Offer",
       "type": "text",
-      "default": "essentials"
+      "default": "Special Bundle Offer"
     },
-    "component.healthkart.HkComboStackBuilder.text.1f25f37393e9": {
+    "component.healthkart.HkComboStackBuilder.text.a8792157cb4f": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "selected · one of each",
+      "label": "product",
       "type": "text",
-      "default": " selected · one of each"
+      "default": "product"
+    },
+    "component.healthkart.HkComboStackBuilder.text.0a3e27b8ca81": {
+      "source": "src/component/healthkart/HkComboStackBuilder.jsx",
+      "group": "Home / Combo Stack Builder",
+      "label": "products",
+      "type": "text",
+      "default": "products"
+    },
+    "component.healthkart.HkComboStackBuilder.text.5c50f851404b": {
+      "source": "src/component/healthkart/HkComboStackBuilder.jsx",
+      "group": "Home / Combo Stack Builder",
+      "label": "selected · bundled together",
+      "type": "text",
+      "default": " selected · bundled together"
     },
     "component.healthkart.HkComboStackBuilder.text.f5f25c5769e6": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
@@ -1316,19 +1549,19 @@
       "type": "text",
       "default": "Save "
     },
-    "component.healthkart.HkComboStackBuilder.text.16a70ee2179c": {
+    "component.healthkart.HkComboStackBuilder.text.edfab678ecd3": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "on listed prices",
+      "label": "with this combo offer!",
       "type": "text",
-      "default": " on listed prices"
+      "default": " with this combo offer!"
     },
-    "component.healthkart.HkComboStackBuilder.text.460315a29f51": {
+    "component.healthkart.HkComboStackBuilder.text.ed2044e62d0d": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "Add selected to cart",
+      "label": "Add Combo to Cart",
       "type": "text",
-      "default": "Add selected to cart"
+      "default": "Add Combo to Cart"
     },
     "component.healthkart.HkComboStackBuilder.attribute-to.edf54f1e1e2f": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
@@ -1344,12 +1577,12 @@
       "type": "text",
       "default": "View your cart "
     },
-    "component.healthkart.HkComboStackBuilder.text.81075f378d99": {
+    "component.healthkart.HkComboStackBuilder.text.ddb4a2419cac": {
       "source": "src/component/healthkart/HkComboStackBuilder.jsx",
       "group": "Home / Combo Stack Builder",
-      "label": "Current catalog prices. Shipping and any eligible offers are confirmed at checkout.",
+      "label": "Direct bundle pricing applied. Verified inventory guaranteed at checkout.",
       "type": "text",
-      "default": "Current catalog prices. Shipping and any eligible offers are confirmed at checkout."
+      "default": "Direct bundle pricing applied. Verified inventory guaranteed at checkout."
     },
     "component.healthkart.HkCustomerReviews.data.REVIEWS": {
       "source": "src/component/healthkart/HkCustomerReviews.jsx",
@@ -1434,7 +1667,7 @@
       "type": "text",
       "default": "Purchased: "
     },
-    "component.healthkart.HkFlashDeals.section.b366c0efba99": {
+    "component.healthkart.HkFlashDeals.section.8b7a686fc953": {
       "source": "src/component/healthkart/HkFlashDeals.jsx",
       "group": "Home / Flash Deals",
       "label": "Show section: Flash Deals & Just Launched",
@@ -1482,6 +1715,13 @@
       "label": "aria label: Next Products",
       "type": "text",
       "default": "Next Products"
+    },
+    "component.healthkart.HkFlashDeals.attribute-label.830bd5128d9e": {
+      "source": "src/component/healthkart/HkFlashDeals.jsx",
+      "group": "Home / Flash Deals",
+      "label": "label: Loading products",
+      "type": "text",
+      "default": "Loading products"
     },
     "component.healthkart.HkFlashDeals.text.d892cb05720e": {
       "source": "src/component/healthkart/HkFlashDeals.jsx",
@@ -2029,6 +2269,132 @@
       "type": "text",
       "default": "Ru"
     },
+    "component.healthkart.HkGymPacksOffer.section.b914d613c73f": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Show section: Exclusive Gym Membership & Supplement Offers",
+      "type": "toggle",
+      "default": true
+    },
+    "component.healthkart.HkGymPacksOffer.attribute-aria-label.2683f455ab6c": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "aria label: Gym Transformation Packs and Coupon System",
+      "type": "text",
+      "default": "Gym Transformation Packs and Coupon System"
+    },
+    "component.healthkart.HkGymPacksOffer.text.e463960a7ddf": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Exclusive Gym Membership & Supplement Offers",
+      "type": "text",
+      "default": "Exclusive Gym Membership & Supplement Offers"
+    },
+    "component.healthkart.HkGymPacksOffer.text.24a16d4ac84d": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Transform Your Physique with Our Official Gym Packs",
+      "type": "text",
+      "default": "Transform Your Physique with Our Official Gym Packs"
+    },
+    "component.healthkart.HkGymPacksOffer.text.648f2c0698e2": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Buy premium Gomzi Nutrition supplement packs and get 1-month unlimited gym access, certified me",
+      "type": "text",
+      "default": "Buy premium Gomzi Nutrition supplement packs and get 1-month unlimited gym access, certified medical & dietetics consultation, and a free digital weight scale machine."
+    },
+    "component.healthkart.HkGymPacksOffer.text.df5e7cadf4e9": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Other Points (",
+      "type": "text",
+      "default": "Other Points ("
+    },
+    "component.healthkart.HkGymPacksOffer.text.4de5282fc871": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Coupon System",
+      "type": "text",
+      "default": "Coupon System"
+    },
+    "component.healthkart.HkGymPacksOffer.text.6b86b273ff34": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "1",
+      "type": "text",
+      "default": "1"
+    },
+    "component.healthkart.HkGymPacksOffer.text.5a9d29518e31": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Take",
+      "type": "text",
+      "default": "Take "
+    },
+    "component.healthkart.HkGymPacksOffer.text.e50129d36a01": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "coupons",
+      "type": "text",
+      "default": " coupons"
+    },
+    "component.healthkart.HkGymPacksOffer.text.d4735e3a265e": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "2",
+      "type": "text",
+      "default": "2"
+    },
+    "component.healthkart.HkGymPacksOffer.text.4e07408562be": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "3",
+      "type": "text",
+      "default": "3"
+    },
+    "component.healthkart.HkGymPacksOffer.text.ab0731713dbf": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Share this with your contacts.",
+      "type": "text",
+      "default": "Share this with your contacts."
+    },
+    "component.healthkart.HkGymPacksOffer.text.88e05783c654": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Link Copied!",
+      "type": "text",
+      "default": "Link Copied!"
+    },
+    "component.healthkart.HkGymPacksOffer.text.8d0227bf933e": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Share Offer",
+      "type": "text",
+      "default": "Share Offer"
+    },
+    "component.healthkart.HkGymPacksOffer.text.998d01144b46": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "(Free Gift)",
+      "type": "text",
+      "default": " (Free Gift)"
+    },
+    "component.healthkart.HkGymPacksOffer.text.45285a814da2": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Adding to Cart...",
+      "type": "text",
+      "default": "Adding to Cart..."
+    },
+    "component.healthkart.HkGymPacksOffer.text.b985a0f0943e": {
+      "source": "src/component/healthkart/HkGymPacksOffer.jsx",
+      "group": "Home / Gym Packs Offer",
+      "label": "Inquire / Claim via WhatsApp",
+      "type": "text",
+      "default": "Inquire / Claim via WhatsApp"
+    },
     "component.healthkart.HkHeader.data.PRIMARY_LINKS": {
       "source": "src/component/healthkart/HkHeader.jsx",
       "group": "Global / Navigation and header",
@@ -2518,13 +2884,6 @@
       "type": "text",
       "default": "View all results for \""
     },
-    "component.healthkart.HkHeader.text.7e1b0d5641f2": {
-      "source": "src/component/healthkart/HkHeader.jsx",
-      "group": "Global / Navigation and header",
-      "label": "Account",
-      "type": "text",
-      "default": "Account"
-    },
     "component.healthkart.HkHeader.text.9d6322c1f4d9": {
       "source": "src/component/healthkart/HkHeader.jsx",
       "group": "Global / Navigation and header",
@@ -2637,6 +2996,13 @@
       "type": "text",
       "default": "Shop navigation"
     },
+    "component.healthkart.HkHeader.text.3a78695388b3": {
+      "source": "src/component/healthkart/HkHeader.jsx",
+      "group": "Global / Navigation and header",
+      "label": "Home",
+      "type": "text",
+      "default": "Home"
+    },
     "component.healthkart.HkHeader.attribute-to.d1d793861fd2": {
       "source": "src/component/healthkart/HkHeader.jsx",
       "group": "Global / Navigation and header",
@@ -2644,12 +3010,12 @@
       "type": "link",
       "default": "/gomzi-supplement?sort=bestseller"
     },
-    "component.healthkart.HkHeader.text.ae273e95c1b9": {
+    "component.healthkart.HkHeader.text.6edcd4efa9df": {
       "source": "src/component/healthkart/HkHeader.jsx",
       "group": "Global / Navigation and header",
-      "label": "Best Sellers",
+      "label": "Shop Now",
       "type": "text",
-      "default": " Best Sellers"
+      "default": "Shop Now"
     },
     "component.healthkart.HkHeader.attribute-href.599aac91dfc1": {
       "source": "src/component/healthkart/HkHeader.jsx",
@@ -2658,12 +3024,12 @@
       "type": "link",
       "default": "/pdf/product-report.pdf"
     },
-    "component.healthkart.HkHeader.text.0d7a18cd0137": {
+    "component.healthkart.HkHeader.text.ce9262721ab2": {
       "source": "src/component/healthkart/HkHeader.jsx",
       "group": "Global / Navigation and header",
-      "label": "NABL Reports",
+      "label": "Batch Lab Reports",
       "type": "text",
-      "default": " NABL Reports"
+      "default": "Batch Lab Reports"
     },
     "component.healthkart.HkHeader.text.5c799f5aa8a7": {
       "source": "src/component/healthkart/HkHeader.jsx",
@@ -2777,13 +3143,6 @@
       "type": "text",
       "default": "Apex Multivitamins & Wellness"
     },
-    "component.healthkart.HkHeader.text.ce9262721ab2": {
-      "source": "src/component/healthkart/HkHeader.jsx",
-      "group": "Global / Navigation and header",
-      "label": "Batch Lab Reports",
-      "type": "text",
-      "default": "Batch Lab Reports"
-    },
     "component.healthkart.HkHeader.text.ad0187add790": {
       "source": "src/component/healthkart/HkHeader.jsx",
       "group": "Global / Navigation and header",
@@ -2798,7 +3157,7 @@
       "type": "text",
       "default": "Login / Register"
     },
-    "component.healthkart.HkHeroBanner.section.37b1267a4ff4": {
+    "component.healthkart.HkHeroBanner.section.86cb35a82232": {
       "source": "src/component/healthkart/HkHeroBanner.jsx",
       "group": "Home / Hero Banner",
       "label": "Show section: Content section",
@@ -2826,7 +3185,7 @@
       "type": "text",
       "default": "Next hero banner"
     },
-    "component.healthkart.HkHeroBanner.section.125cc8fa4171": {
+    "component.healthkart.HkHeroBanner.section.7bffd6c03696": {
       "source": "src/component/healthkart/HkHeroBanner.jsx",
       "group": "Home / Hero Banner",
       "label": "Show section: Loading featured offers…",
@@ -2846,6 +3205,13 @@
       "label": "Loading featured offers…",
       "type": "text",
       "default": "Loading featured offers…"
+    },
+    "component.healthkart.HkProductCardActions.text.0e9408353c72": {
+      "source": "src/component/healthkart/HkProductCardActions.jsx",
+      "group": "Home / Product Card Actions",
+      "label": "Add to cart",
+      "type": "text",
+      "default": "Add to cart"
     },
     "component.healthkart.HkProductCardActions.text.9fd728c66c9a": {
       "source": "src/component/healthkart/HkProductCardActions.jsx",
@@ -2882,7 +3248,7 @@
       "type": "text",
       "default": "Supplement Knowledge & Buyer's Guide"
     },
-    "component.healthkart.HkStealDeals.section.50a0a04f2d67": {
+    "component.healthkart.HkStealDeals.section.3ec13115817a": {
       "source": "src/component/healthkart/HkStealDeals.jsx",
       "group": "Home / Steal Deals",
       "label": "Show section: Deals You Cannot Miss",
@@ -3022,12 +3388,19 @@
       "type": "text",
       "default": "Verified Standard"
     },
-    "component.PageLoading.text.367b5d3f40f1": {
+    "component.PageLoading.attribute-label.66c38684dd69": {
       "source": "src/component/PageLoading.jsx",
       "group": "Website sections / Page Loading",
-      "label": "Loading Gomzi Nutrition…",
+      "label": "label: Loading Gomzi Nutrition",
       "type": "text",
-      "default": "Loading Gomzi Nutrition…"
+      "default": "Loading Gomzi Nutrition"
+    },
+    "component.ProductPageSkeleton.attribute-label.2ef03cc9475f": {
+      "source": "src/component/ProductPageSkeleton.jsx",
+      "group": "Website sections / Product Page Skeleton",
+      "label": "label: Loading product details",
+      "type": "text",
+      "default": "Loading product details"
     },
     "component.ui.Ambassadors-Detail.text.a03800365a3d": {
       "source": "src/component/ui/Ambassadors-Detail.jsx",
@@ -3141,7 +3514,7 @@
       "type": "link",
       "default": "/blog"
     },
-    "component.ui.BlogDetail.section.6f90a5a0d323": {
+    "component.ui.BlogDetail.section.06ceef971553": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Home",
@@ -3183,21 +3556,21 @@
       "type": "text",
       "default": "By "
     },
-    "component.ui.BlogDetail.section.ed16d272044e": {
+    "component.ui.BlogDetail.section.15811bd57b46": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Content section",
       "type": "toggle",
       "default": true
     },
-    "component.ui.BlogDetail.section.ecb2c5cd363b": {
+    "component.ui.BlogDetail.section.2f9081896ab7": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: →",
       "type": "toggle",
       "default": true
     },
-    "component.ui.BlogDetail.section.cc557d460799": {
+    "component.ui.BlogDetail.section.c6cb970822a6": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: →",
@@ -3211,42 +3584,42 @@
       "type": "text",
       "default": "← Back to Blog"
     },
-    "component.ui.BlogDetail.section.d518b82e2afb": {
+    "component.ui.BlogDetail.section.4975117a3464": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Content section",
       "type": "toggle",
       "default": true
     },
-    "component.ui.BlogDetail.section.453e17ba6783": {
+    "component.ui.BlogDetail.section.2b5b537ed340": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Content section",
       "type": "toggle",
       "default": true
     },
-    "component.ui.BlogDetail.section.c680435725f2": {
+    "component.ui.BlogDetail.section.30ed98019646": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Content section",
       "type": "toggle",
       "default": true
     },
-    "component.ui.BlogDetail.section.93b959a4a44e": {
+    "component.ui.BlogDetail.section.4f803c4f3466": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: !",
       "type": "toggle",
       "default": true
     },
-    "component.ui.BlogDetail.section.cb55bb2090aa": {
+    "component.ui.BlogDetail.section.d308a7d4aac4": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: “",
       "type": "toggle",
       "default": true
     },
-    "component.ui.BlogDetail.section.6a1a7601fac9": {
+    "component.ui.BlogDetail.section.c248cd2922f0": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Simple formula",
@@ -3260,14 +3633,14 @@
       "type": "text",
       "default": "Simple formula"
     },
-    "component.ui.BlogDetail.section.257bcb82ac5a": {
+    "component.ui.BlogDetail.section.9364c0b7ec4a": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Content section",
       "type": "toggle",
       "default": true
     },
-    "component.ui.BlogDetail.section.0bf0ae38be9e": {
+    "component.ui.BlogDetail.section.c4ccfb78e0e0": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Frequently Asked Questions",
@@ -3281,14 +3654,14 @@
       "type": "text",
       "default": "Frequently Asked Questions"
     },
-    "component.ui.BlogDetail.section.0548fd5c3d8c": {
+    "component.ui.BlogDetail.section.b682600c92c6": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Content section",
       "type": "toggle",
       "default": true
     },
-    "component.ui.BlogDetail.section.fcd8b869b3d9": {
+    "component.ui.BlogDetail.section.786b91e6228e": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Further Reading & Sources",
@@ -3302,7 +3675,7 @@
       "type": "text",
       "default": "Further Reading & Sources"
     },
-    "component.ui.BlogDetail.section.40d15dfada4c": {
+    "component.ui.BlogDetail.section.e5a31b273530": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Related Reading",
@@ -3316,7 +3689,7 @@
       "type": "text",
       "default": "Related Reading"
     },
-    "component.ui.BlogDetail.section.43fff33f1aef": {
+    "component.ui.BlogDetail.section.963c1e35c62c": {
       "source": "src/component/ui/BlogDetail.jsx",
       "group": "Website sections / Blog Detail",
       "label": "Show section: Further Reading",
@@ -3330,7 +3703,7 @@
       "type": "text",
       "default": "Further Reading"
     },
-    "component.ui.Blogs.section.a512db2741cd": {
+    "component.ui.Blogs.section.9dcbe7e30f0b": {
       "source": "src/component/ui/Blogs.jsx",
       "group": "Website sections / Blogs",
       "label": "Show section: The Gomzi Journal",
@@ -3442,7 +3815,7 @@
       "type": "text",
       "default": "Manufacturing Facility"
     },
-    "component.ui.Cart.section.38f13ba4550b": {
+    "component.ui.Cart.section.7880bd7fe5dc": {
       "source": "src/component/ui/Cart.jsx",
       "group": "Website sections / Cart",
       "label": "Show section: We couldn't load your cart",
@@ -3602,6 +3975,34 @@
       "label": "aria label: Close cart",
       "type": "text",
       "default": "Close cart"
+    },
+    "component.ui.CartSidebar.text.df0fe9e00d35": {
+      "source": "src/component/ui/CartSidebar.jsx",
+      "group": "Website sections / Cart Sidebar",
+      "label": "Try Again",
+      "type": "text",
+      "default": "Try Again"
+    },
+    "component.ui.CartSidebar.text.5bd2e4695d2d": {
+      "source": "src/component/ui/CartSidebar.jsx",
+      "group": "Website sections / Cart Sidebar",
+      "label": "Your cart is empty",
+      "type": "text",
+      "default": "Your cart is empty"
+    },
+    "component.ui.CartSidebar.text.1f1c4eb61b1b": {
+      "source": "src/component/ui/CartSidebar.jsx",
+      "group": "Website sections / Cart Sidebar",
+      "label": "Explore our clean, lab-tested supplements.",
+      "type": "text",
+      "default": "Explore our clean, lab-tested supplements."
+    },
+    "component.ui.CartSidebar.text.ba2feb5fdc67": {
+      "source": "src/component/ui/CartSidebar.jsx",
+      "group": "Website sections / Cart Sidebar",
+      "label": "Explore Supplements",
+      "type": "text",
+      "default": "Explore Supplements"
     },
     "component.ui.CartSidebar.text.8c0f2cb34079": {
       "source": "src/component/ui/CartSidebar.jsx",
@@ -4633,7 +5034,7 @@
       "type": "text",
       "default": "Founder"
     },
-    "component.ui.ProductDetail.section.7fe5e0f74493": {
+    "component.ui.ProductDetail.section.4c5f863a2792": {
       "source": "src/component/ui/ProductDetail.jsx",
       "group": "Website sections / Product Detail",
       "label": "Show section: Try again",
@@ -4829,6 +5230,13 @@
       "type": "text",
       "default": " scoop"
     },
+    "component.ui.Products.text.b4935894c8ce": {
+      "source": "src/component/ui/Products.jsx",
+      "group": "Website sections / Products",
+      "label": "…",
+      "type": "text",
+      "default": "…"
+    },
     "component.ui.Products.text.d358110b3c01": {
       "source": "src/component/ui/Products.jsx",
       "group": "Website sections / Products",
@@ -4843,6 +5251,13 @@
       "type": "text",
       "default": "• Filtered by "
     },
+    "component.ui.Products.text.36075c419554": {
+      "source": "src/component/ui/Products.jsx",
+      "group": "Website sections / Products",
+      "label": "• Sorted by",
+      "type": "text",
+      "default": "• Sorted by "
+    },
     "component.ui.Products.text.8f3e7ea6ed49": {
       "source": "src/component/ui/Products.jsx",
       "group": "Website sections / Products",
@@ -4850,47 +5265,26 @@
       "type": "text",
       "default": "Sort:"
     },
-    "component.ui.Products.text.b330d6701b55": {
+    "component.ui.Products.text.b49c81b7b51d": {
       "source": "src/component/ui/Products.jsx",
       "group": "Website sections / Products",
-      "label": "Category:",
+      "label": "Active:",
       "type": "text",
-      "default": "Category:"
+      "default": "Active:"
     },
-    "component.ui.Products.text.bec69036aa27": {
+    "component.ui.Products.text.645982c52b7c": {
       "source": "src/component/ui/Products.jsx",
       "group": "Website sections / Products",
-      "label": "Sort",
+      "label": "Reset all",
       "type": "text",
-      "default": "Sort"
+      "default": "Reset all"
     },
-    "component.ui.Products.text.cec364aafdf1": {
+    "component.ui.Products.attribute-aria-label.68d509ba8fc5": {
       "source": "src/component/ui/Products.jsx",
       "group": "Website sections / Products",
-      "label": "Gomzi Nutrition",
+      "label": "aria label: Shop filters",
       "type": "text",
-      "default": "Gomzi Nutrition"
-    },
-    "component.ui.Products.text.13937600fa48": {
-      "source": "src/component/ui/Products.jsx",
-      "group": "Website sections / Products",
-      "label": "Filter Categories",
-      "type": "text",
-      "default": "Filter Categories"
-    },
-    "component.ui.Products.attribute-aria-label.5f47a389849e": {
-      "source": "src/component/ui/Products.jsx",
-      "group": "Website sections / Products",
-      "label": "aria label: Close categories",
-      "type": "text",
-      "default": "Close categories"
-    },
-    "component.ui.Products.attribute-aria-label.bef9416eeb0b": {
-      "source": "src/component/ui/Products.jsx",
-      "group": "Website sections / Products",
-      "label": "aria label: Shop categories",
-      "type": "text",
-      "default": "Shop categories"
+      "default": "Shop filters"
     },
     "component.ui.Products.text.b8b1d894c683": {
       "source": "src/component/ui/Products.jsx",
@@ -4913,12 +5307,19 @@
       "type": "text",
       "default": "Product categories"
     },
-    "component.ui.Products.text.0f12f4b3ec61": {
+    "component.ui.Products.text.dcf9169abd2b": {
       "source": "src/component/ui/Products.jsx",
       "group": "Website sections / Products",
-      "label": "items",
+      "label": "Sorted by",
       "type": "text",
-      "default": " items"
+      "default": "Sorted by "
+    },
+    "component.ui.Products.attribute-aria-label.b8efeba119bf": {
+      "source": "src/component/ui/Products.jsx",
+      "group": "Website sections / Products",
+      "label": "aria label: Product results",
+      "type": "text",
+      "default": "Product results"
     },
     "component.ui.Products.attribute-src.3bdf3a5024af": {
       "source": "src/component/ui/Products.jsx",
@@ -4969,12 +5370,12 @@
       "type": "text",
       "default": "Try again"
     },
-    "component.ui.Products.text.dbbeca852db0": {
+    "component.ui.Products.text.7179ea0035fc": {
       "source": "src/component/ui/Products.jsx",
       "group": "Website sections / Products",
-      "label": "View all products",
+      "label": "Clear filters",
       "type": "text",
-      "default": "View all products"
+      "default": "Clear filters"
     },
     "component.ui.SocialProofSlider.data.slides": {
       "source": "src/component/ui/SocialProofSlider.jsx",
@@ -10234,13 +10635,6 @@
       "type": "text",
       "default": "Sign In"
     },
-    "pages.Auth.Login.text.4e1c522fa19c": {
-      "source": "src/pages/Auth/Login.jsx",
-      "group": "Account / Login",
-      "label": "Email address or phone number",
-      "type": "text",
-      "default": "Email address or phone number"
-    },
     "pages.Auth.Login.attribute-aria-label.e380920438b2": {
       "source": "src/pages/Auth/Login.jsx",
       "group": "Account / Login",
@@ -10741,6 +11135,27 @@
       "type": "link",
       "default": "/login?redirect=/checkouts"
     },
+    "pages.Checkouts.section.b5a9ede9a935": {
+      "source": "src/pages/Checkouts.jsx",
+      "group": "Pages / Checkouts",
+      "label": "Show section: We couldn't load your cart. Your items are saved.",
+      "type": "toggle",
+      "default": true
+    },
+    "pages.Checkouts.text.d5c00413a888": {
+      "source": "src/pages/Checkouts.jsx",
+      "group": "Pages / Checkouts",
+      "label": "We couldn't load your cart. Your items are saved.",
+      "type": "text",
+      "default": "We couldn't load your cart. Your items are saved."
+    },
+    "pages.Checkouts.text.d8b8392e2c54": {
+      "source": "src/pages/Checkouts.jsx",
+      "group": "Pages / Checkouts",
+      "label": "Try again",
+      "type": "text",
+      "default": "Try again"
+    },
     "pages.Checkouts.attribute-to.e417935791c3": {
       "source": "src/pages/Checkouts.jsx",
       "group": "Pages / Checkouts",
@@ -11050,6 +11465,125 @@
       "type": "toggle",
       "default": true
     },
+    "pages.GymOffers.attribute-title.fe11268461ae": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "title: Exclusive Gym Offers & Transformation Packs | Gomzi Nutrition by RAG",
+      "type": "text",
+      "default": "Exclusive Gym Offers & Transformation Packs | Gomzi Nutrition by RAG"
+    },
+    "pages.GymOffers.attribute-description.3bc09531c461": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "description: Get 1-month unlimited gym access, certified dietitian and doctor consultation, and a free weigh",
+      "type": "text",
+      "default": "Get 1-month unlimited gym access, certified dietitian and doctor consultation, and a free weight scale machine with Gomzi Nutrition's Rapid Weight Loss and Insane Performance Packs."
+    },
+    "pages.GymOffers.section.0d21ae129a64": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Show section: Why Choose Our Gym Transformation Program?",
+      "type": "toggle",
+      "default": true
+    },
+    "pages.GymOffers.attribute-aria-label.6761e1f88f42": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "aria label: Gym Offer Benefits",
+      "type": "text",
+      "default": "Gym Offer Benefits"
+    },
+    "pages.GymOffers.text.4191e2d41e98": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Why Choose Our Gym Transformation Program?",
+      "type": "text",
+      "default": "Why Choose Our Gym Transformation Program?"
+    },
+    "pages.GymOffers.text.90c8b52074e4": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Unlike generic gym memberships, every Gomzi pack combines scientifically dosed sports supplemen",
+      "type": "text",
+      "default": "Unlike generic gym memberships, every Gomzi pack combines scientifically dosed sports supplements with supervised medical coaching."
+    },
+    "pages.GymOffers.text.60de98932361": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Unlimited Gym Access",
+      "type": "text",
+      "default": "Unlimited Gym Access"
+    },
+    "pages.GymOffers.text.b395e72c58d8": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Workout whenever you want with flexible hours across partner gyms for the entire 30 days.",
+      "type": "text",
+      "default": "Workout whenever you want with flexible hours across partner gyms for the entire 30 days."
+    },
+    "pages.GymOffers.text.0deedc709153": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Doctor & Dietitian Support",
+      "type": "text",
+      "default": "Doctor & Dietitian Support"
+    },
+    "pages.GymOffers.text.5dd30f7952ad": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Get full dietary plans, macronutrient breakdowns, and weekly follow-ups tailored to your goals.",
+      "type": "text",
+      "default": "Get full dietary plans, macronutrient breakdowns, and weekly follow-ups tailored to your goals."
+    },
+    "pages.GymOffers.text.71e0d790f7f6": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "100% Lab Tested",
+      "type": "text",
+      "default": "100% Lab Tested"
+    },
+    "pages.GymOffers.text.34477f187259": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Every supplement tub has individual NABL batch certificates verifying zero spiked nitrogen.",
+      "type": "text",
+      "default": "Every supplement tub has individual NABL batch certificates verifying zero spiked nitrogen."
+    },
+    "pages.GymOffers.text.b3697ae30e79": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Guaranteed Results",
+      "type": "text",
+      "default": "Guaranteed Results"
+    },
+    "pages.GymOffers.text.57f1d4e585ef": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Follow our RTP structured program and achieve measurable, verifiable body transformation.",
+      "type": "text",
+      "default": "Follow our RTP structured program and achieve measurable, verifiable body transformation."
+    },
+    "pages.GymOffers.text.349b6692503b": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Have custom questions about our gym tie-ups?",
+      "type": "text",
+      "default": "Have custom questions about our gym tie-ups?"
+    },
+    "pages.GymOffers.text.bd75f7a3c86c": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Chat directly with our senior fitness consultants on WhatsApp.",
+      "type": "text",
+      "default": "Chat directly with our senior fitness consultants on WhatsApp."
+    },
+    "pages.GymOffers.text.efc3c6a2893f": {
+      "source": "src/pages/GymOffers.jsx",
+      "group": "Pages / Gym Offers",
+      "label": "Talk to a Coach →",
+      "type": "text",
+      "default": "Talk to a Coach →"
+    },
     "pages.Ingredients.attribute-head.87675db83a32": {
       "source": "src/pages/Ingredients.jsx",
       "group": "Pages / Ingredients",
@@ -11120,7 +11654,7 @@
       "type": "text",
       "default": "Apply for the official RAG Pro Partner Program by Gomzi Nutrition. High margins, 100% genuine lab-tested supplements, and dedicated business support for certified fitness professionals."
     },
-    "pages.Inquiry.Inquiry.section.351618eed3ba": {
+    "pages.Inquiry.Inquiry.section.3a18689e189e": {
       "source": "src/pages/Inquiry/Inquiry.jsx",
       "group": "Pages / Inquiry",
       "label": "Show section: RAG Pro Partner Program",
@@ -12288,13 +12822,6 @@
       "type": "text",
       "default": "My Orders"
     },
-    "pages.Profile.components.OrdersSection.text.c0df4899b421": {
-      "source": "src/pages/Profile/components/OrdersSection.jsx",
-      "group": "Account / Orders Section",
-      "label": "Loading your orders…",
-      "type": "text",
-      "default": "Loading your orders…"
-    },
     "pages.Profile.components.OrdersSection.text.d8b8392e2c54": {
       "source": "src/pages/Profile/components/OrdersSection.jsx",
       "group": "Account / Orders Section",
@@ -12344,6 +12871,13 @@
       "type": "text",
       "default": "Total"
     },
+    "pages.Profile.components.OrdersSection.text.e0feeb8f09ee": {
+      "source": "src/pages/Profile/components/OrdersSection.jsx",
+      "group": "Account / Orders Section",
+      "label": "Placed · Pay on delivery",
+      "type": "text",
+      "default": "Placed · Pay on delivery"
+    },
     "pages.Profile.components.OrdersSection.text.4edc8bfafc6b": {
       "source": "src/pages/Profile/components/OrdersSection.jsx",
       "group": "Account / Orders Section",
@@ -12379,6 +12913,13 @@
       "type": "text",
       "default": "Order Status"
     },
+    "pages.Profile.components.OrdersSection.text.faf039df3343": {
+      "source": "src/pages/Profile/components/OrdersSection.jsx",
+      "group": "Account / Orders Section",
+      "label": "PLACED",
+      "type": "text",
+      "default": "PLACED"
+    },
     "pages.Profile.components.OrdersSection.text.6e24470fcecb": {
       "source": "src/pages/Profile/components/OrdersSection.jsx",
       "group": "Account / Orders Section",
@@ -12392,19 +12933,6 @@
       "label": "Order Tracking",
       "type": "text",
       "default": "Order Tracking"
-    },
-    "pages.Profile.components.OrdersSection.items.59b9a2614e38": {
-      "source": "src/pages/Profile/components/OrdersSection.jsx",
-      "group": "Account / Orders Section",
-      "label": "Repeated items",
-      "type": "collection",
-      "default": [
-        "PLACED",
-        "CONFIRMED",
-        "SHIPPED",
-        "OUT FOR DELIVERY",
-        "DELIVERED"
-      ]
     },
     "pages.Profile.components.ProfileSection.text.64ceb89543b7": {
       "source": "src/pages/Profile/components/ProfileSection.jsx",
@@ -12588,7 +13116,7 @@
       "type": "text",
       "default": "Manage your details and keep track of your orders."
     },
-    "pages.Thank-you.section.15d45f250912": {
+    "pages.Thank-you.section.73a2af8864fc": {
       "source": "src/pages/Thank-you.jsx",
       "group": "Pages / Thank you",
       "label": "Show section: We couldn't find this order",
@@ -12644,12 +13172,33 @@
       "type": "text",
       "default": "Thank You!"
     },
-    "pages.Thank-you.text.6d4e99974ff4": {
+    "pages.Thank-you.text.11a74a428880": {
       "source": "src/pages/Thank-you.jsx",
       "group": "Pages / Thank you",
-      "label": "Your order has been placed successfully. We've sent a confirmation email and will start process",
+      "label": "Payment confirmation pending",
       "type": "text",
-      "default": "Your order has been placed successfully. We've sent a confirmation email and will start processing your order shortly."
+      "default": "Payment confirmation pending"
+    },
+    "pages.Thank-you.text.7191983ecbea": {
+      "source": "src/pages/Thank-you.jsx",
+      "group": "Pages / Thank you",
+      "label": "Your order has been placed successfully. You can follow its progress in My Orders.",
+      "type": "text",
+      "default": "Your order has been placed successfully. You can follow its progress in My Orders."
+    },
+    "pages.Thank-you.text.e03f4e7bdc83": {
+      "source": "src/pages/Thank-you.jsx",
+      "group": "Pages / Thank you",
+      "label": "We're waiting for payment confirmation. Please check this order before making another payment.",
+      "type": "text",
+      "default": "We're waiting for payment confirmation. Please check this order before making another payment."
+    },
+    "pages.Thank-you.text.96fa4db2a719": {
+      "source": "src/pages/Thank-you.jsx",
+      "group": "Pages / Thank you",
+      "label": "Check My Orders for the latest payment and delivery details.",
+      "type": "text",
+      "default": "Check My Orders for the latest payment and delivery details."
     },
     "pages.Thank-you.text.3f7d9a54aa0e": {
       "source": "src/pages/Thank-you.jsx",
@@ -12657,6 +13206,13 @@
       "label": "Order ID:",
       "type": "text",
       "default": "Order ID:"
+    },
+    "pages.Thank-you.text.ae1b6f51f5f5": {
+      "source": "src/pages/Thank-you.jsx",
+      "group": "Pages / Thank you",
+      "label": "Check payment status",
+      "type": "text",
+      "default": "Check payment status"
     },
     "pages.Thank-you.text.46bb669f4bac": {
       "source": "src/pages/Thank-you.jsx",
@@ -12679,12 +13235,26 @@
       "type": "text",
       "default": "Payment Method"
     },
+    "pages.Thank-you.text.9f3c80ced76f": {
+      "source": "src/pages/Thank-you.jsx",
+      "group": "Pages / Thank you",
+      "label": "Amount due on delivery",
+      "type": "text",
+      "default": "Amount due on delivery"
+    },
     "pages.Thank-you.text.2a073fa4df81": {
       "source": "src/pages/Thank-you.jsx",
       "group": "Pages / Thank you",
       "label": "Total Paid",
       "type": "text",
       "default": "Total Paid"
+    },
+    "pages.Thank-you.text.03cae7f5eab6": {
+      "source": "src/pages/Thank-you.jsx",
+      "group": "Pages / Thank you",
+      "label": "Order Total",
+      "type": "text",
+      "default": "Order Total"
     },
     "pages.Thank-you.text.3947c8d9d3bc": {
       "source": "src/pages/Thank-you.jsx",

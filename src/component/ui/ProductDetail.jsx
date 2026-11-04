@@ -47,8 +47,6 @@ export default function NARAProductPage() {
   const { slug } = useParams();
   const { product, loading, error, retry } = useProducts({ slug });
 
-  useEffect(() => { setSelectedVariation(null); setActiveIndex(0); }, [slug]);
-
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedVariation, setSelectedVariation] = useState(null);
   const currentProduct = selectedVariation || product;
@@ -56,6 +54,7 @@ export default function NARAProductPage() {
   const { isAuthenticated } = useAuth();
   const [activeIndex, setActiveIndex] = useState(0);
   const desktopSwiperRef = useRef(null);
+  useEffect(() => { setSelectedVariation(null); setActiveIndex(0); }, [slug]);
 
   useEffect(() => {
     if (product?._id) trackRecentlyViewed(product);
@@ -142,18 +141,22 @@ export default function NARAProductPage() {
     try {
       setCartLoading(true);
 
+      const variationId =
+        selectedVariation && !selectedVariation.isBase && selectedVariation._id !== "base"
+          ? selectedVariation._id
+          : null;
+
       const payload = {
         item_id: product._id,
         item_type: "FG_MEAL_PRODUCT",
         quantity: 1,
-        notes: selectedVariation
+        notes: variationId
           ? {
-              variation_id: selectedVariation._id,
+              variation_id: variationId,
             }
           : {},
       };
-      // console.log("Payload for addToCart:", payload);
-      // console.log("Is user authenticated?", isAuthenticated);
+
       if (isAuthenticated) {
         const result = await addToCart(payload);
 
@@ -168,7 +171,7 @@ export default function NARAProductPage() {
         addGuestCartItem({
           product,
           quantity: 1,
-          selectedVariation,
+          selectedVariation: variationId ? selectedVariation : null,
         });
 
         successToast("Added to cart");

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { getOrdersApi } from "../../../api/order.api";
 import { Link } from "react-router-dom";
+import { OrderListSkeleton } from "../../../component/common/LoadingSkeletons";
+
+import { GymAccessOffer } from "../../../component/common/GymAccessOffer";
 
 function OrdersSection() {
   const [orders, setOrders] = useState([]);
@@ -35,7 +38,7 @@ function OrdersSection() {
 
       <div className="space-y-6">
         {loading ? (
-          <div role="status" className="site-surface p-10 text-center text-text-light">Loading your orders…</div>
+          <OrderListSkeleton />
         ) : error ? (
           <div role="alert" className="site-surface p-10 text-center">
             <p className="text-text-light">{error}</p>
@@ -71,6 +74,8 @@ function OrdersSection() {
                   key={index}
                   className="bg-white rounded-2xl md:rounded-3xl shadow-sm hover:shadow-md border border-border overflow-hidden transition-all duration-300"
                 >
+                  {order.status === "SUCCESS" && order.notes?.gym_access_offer && <div className="px-5"><GymAccessOffer offer={order.notes.gym_access_offer} confirmed /></div>}
+
                   {/* HEADER */}
                   <button
                     type="button"
@@ -91,12 +96,12 @@ function OrdersSection() {
                         </p>
 
                         <div className="flex gap-3 mt-4 flex-wrap">
-                          {order.CART?.slice(0, 2).map((item) => (
+                          {order.CART?.slice(0, 2).map((item, itemIndex) => (
                             <div
-                              key={`${order._id}-${item._id}`}
+                              key={`${order._id}-${itemIndex}`}
                               className="bg-gray-100 px-3 py-1.5 rounded-full text-xs md:text-sm font-medium"
                             >
-                              {item.name}
+                              {order.multiple_items?.[itemIndex]?.notes?.product_name || item?.name || "Product"}
                             </div>
                           ))}
 
@@ -128,7 +133,7 @@ function OrdersSection() {
                                 : "bg-yellow-100 text-yellow-700"
                             }`}
                           >
-                            {order.status}
+                            {order.purchase_mode === "Cash On Delivery" && order.status === "SUCCESS" ? "Placed · Pay on delivery" : order.status}
                           </span>
                         </div>
 
@@ -160,13 +165,12 @@ function OrdersSection() {
 
                         <div className="space-y-4">
                           {order.CART?.map((item, index) => {
-                            const matchedItem = order.multiple_items?.find(
-                              (m) => m.item_id === item._id,
-                            );
+                            const matchedItem = order.multiple_items?.[index];
+                            const variation = item?.variations?.find((entry) => String(entry._id) === String(matchedItem?.notes?.variation_id));
 
                             return (
                               <div
-                                key={`${order._id}-${item._id}-${index}`}
+                                key={`${order._id}-${index}`}
                                 className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gray-50 rounded-2xl p-4"
                               >
                                 <div className="flex items-center gap-4">
@@ -177,7 +181,7 @@ function OrdersSection() {
 
                                   <div>
                                     <h4 className="font-semibold text-sm md:text-base">
-                                      {item.name}
+                                      {matchedItem?.notes?.product_name || [item?.name || "Product", variation?.name].filter(Boolean).join(" - ")}
                                     </h4>
 
                                     <p className="text-xs md:text-sm text-gray-500">
@@ -187,7 +191,7 @@ function OrdersSection() {
                                 </div>
 
                                 <h3 className="text-lg md:text-xl font-bold">
-                                  ₹{item.price.toLocaleString()}
+                                  ₹{Number(matchedItem?.amount ?? item?.price ?? 0).toLocaleString()}
                                 </h3>
                               </div>
                             );
@@ -220,9 +224,7 @@ function OrdersSection() {
 
                           <h3 className="font-bold text-lg mt-2 text-primary">
                             {
-                              order.user_meal_product?.tracking?.[
-                                order.user_meal_product.tracking.length - 1
-                              ]?.shipment_status
+                              order.user_meal_product?.tracking?.filter((entry) => entry.status !== false).at(-1)?.shipment_status || (order.status === "SUCCESS" ? "PLACED" : order.status)
                             }
                           </h3>
                         </div>
@@ -251,44 +253,70 @@ function OrdersSection() {
                         <div className="overflow-x-auto pb-3 scrollbar-hide">
                         <div className="flex min-w-[620px] items-center justify-between relative">
                           <div className="absolute top-5 left-0 w-full h-1 bg-gray-200"></div>
-
-                          {[
-                            "PLACED",
-                            "CONFIRMED",
-                            "SHIPPED",
-                            "OUT FOR DELIVERY",
-                            "DELIVERED",
-                          ].map((step, index) => {
-                            const completed =
-                              order.user_meal_product?.tracking?.some(
-                                (t) => t.shipment_status === step,
-                              );
+                          {(() => {
+                            const trackingSteps = [
+                              "PLACED",
+                              "CONFIRMED",
+                              "SHIPPED",
+                              "OUT FOR DELIVERY",
+                              "DELIVERED",
+                            ];
+                            const trackingList = order.user_meal_product?.tracking || [];
+                            const highestIndex = Math.max(
+                              -1,
+                              ...trackingList.map((t) => {
+                                const statusName = t.shipment_status === 'DISPATCHED' ? 'SHIPPED' : t.shipment_status;
+                                return trackingSteps.indexOf(statusName);
+                              })
+                            );
 
                             return (
-                              <div
-                                key={index}
-                                className="relative z-10 flex flex-col items-center flex-1"
-                              >
-                                <div
-                                  className={`w-12 h-12 rounded-full flex items-center justify-center font-bold border-4 ${
-                                    completed
-                                      ? "bg-green-500 border-green-500 text-white"
-                                      : "bg-white border-gray-300 text-gray-400"
-                                  }`}
-                                >
-                                  ✓
-                                </div>
+                              <>
+                                {highestIndex >= 0 && (
+                                  <div
+                                    className="absolute top-5 left-0 h-1 bg-green-500 transition-all duration-300"
+                                    style={{
+                                      width: `${(highestIndex / (trackingSteps.length - 1)) * 100}%`,
+                                    }}
+                                  ></div>
+                                )}
+                                {trackingSteps.map((step, index) => {
+                                  const completed =
+                                    highestIndex >= index ||
+                                    trackingList.some(
+                                      (t) =>
+                                        t.shipment_status === step ||
+                                        (step === "SHIPPED" && t.shipment_status === "DISPATCHED")
+                                    );
 
-                                <p
-                                  className={`mt-3 text-sm text-center font-semibold ${
-                                    completed ? "text-black" : "text-gray-400"
-                                  }`}
-                                >
-                                  {step}
-                                </p>
-                              </div>
+                                  return (
+                                    <div
+                                      key={index}
+                                      className="relative z-10 flex flex-col items-center flex-1"
+                                    >
+                                      <div
+                                        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold border-4 transition-all duration-200 ${
+                                          completed
+                                            ? "bg-green-500 border-green-500 text-white"
+                                            : "bg-white border-gray-300 text-gray-400"
+                                        }`}
+                                      >
+                                        ✓
+                                      </div>
+
+                                      <p
+                                        className={`mt-3 text-sm text-center font-semibold ${
+                                          completed ? "text-black" : "text-gray-400"
+                                        }`}
+                                      >
+                                        {step}
+                                      </p>
+                                    </div>
+                                  );
+                                })}
+                              </>
                             );
-                          })}
+                          })()}
                         </div>
                         </div>
                       </div>

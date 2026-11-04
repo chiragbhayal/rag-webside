@@ -1,7 +1,50 @@
+export const generateUUID = () => {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    try {
+      return crypto.randomUUID();
+    } catch {
+      // fallback below
+    }
+  }
+  return "cart_" + Date.now().toString(36) + "_" + Math.random().toString(36).substring(2, 9);
+};
+
 export const getGuestCart = () => {
   try {
-    const cart = JSON.parse(localStorage.getItem("guest_cart") || "[]");
-    return Array.isArray(cart) ? cart.filter(item => item?.item_id && item?.item_details && Number(item.quantity) > 0) : [];
+    const raw = localStorage.getItem("guest_cart");
+    if (!raw) return [];
+    const cart = JSON.parse(raw);
+    if (!Array.isArray(cart)) return [];
+
+    return cart
+      .filter((item) => item?.item_id && Number(item.quantity) > 0)
+      .map((item) => {
+        if (!item.item_details) {
+          item.item_details = {
+            _id: item.item_id,
+            name: item.name || "Product",
+            price: item.price || 0,
+            discountPrice: item.discountPrice || item.price || 0,
+            flavour: item.flavour || null,
+            displayImages: Array.isArray(item.displayImages)
+              ? item.displayImages
+              : item.image
+                ? [item.image]
+                : [],
+            variation: item.notes?.variation_id
+              ? {
+                  _id: item.notes.variation_id,
+                  name: item.variationName || null,
+                  price: item.price || 0,
+                  discountPrice: item.discountPrice || item.price || 0,
+                  flavour: item.flavour || null,
+                  displayImages: item.image ? [item.image] : [],
+                }
+              : null,
+          };
+        }
+        return item;
+      });
   } catch {
     return [];
   }
@@ -11,6 +54,7 @@ export const addGuestCartItem = ({
   product,
   quantity = 1,
   selectedVariation,
+  notes = {},
 }) => {
   const cart = getGuestCart();
 
@@ -19,6 +63,7 @@ export const addGuestCartItem = ({
   const existingItem = cart.find(
     (item) =>
       item.item_id === product._id &&
+      (item.notes?.combo_id || null) === (notes.combo_id || null) &&
       (item.notes?.variation_id || null) === variationId,
   );
 
@@ -31,7 +76,7 @@ export const addGuestCartItem = ({
   }
 
   cart.push({
-    _id: crypto.randomUUID(),
+    _id: generateUUID(),
 
     item_id: product._id,
 
@@ -39,15 +84,12 @@ export const addGuestCartItem = ({
 
     quantity,
 
-    notes: variationId
-      ? {
-          variation_id: variationId,
-        }
-      : {},
+    notes: { ...notes, ...(variationId && { variation_id: variationId }) },
 
     item_details: {
       _id: product._id,
       name: product.name,
+      company: product.company,
       price: product.price,
       discountPrice: product.discountPrice,
       flavour: product.flavour,
@@ -150,4 +192,11 @@ export const changeCartProductQuantity = (product, delta = 1) => {
 
   updateGuestCartQuantity(existing._id, newQty);
   return newQty;
+};
+
+/**
+ * Universal addProductToCart export required by homepage category showcase sections
+ */
+export const addProductToCart = async (product) => {
+  return changeCartProductQuantity(product, 1);
 };
